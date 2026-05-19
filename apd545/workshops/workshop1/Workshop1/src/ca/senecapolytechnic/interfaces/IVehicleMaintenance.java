@@ -1,12 +1,7 @@
 package ca.senecapolytechnic.interfaces;
 
 public interface IVehicleMaintenance {
-    public int getServiceInterval(){
-
-    }
-
-    public double getMaintenanceCost(){
-        
-    }
+    public abstract int getServiceInterval();
+    public abstract double getMaintenanceCost();
 }
 

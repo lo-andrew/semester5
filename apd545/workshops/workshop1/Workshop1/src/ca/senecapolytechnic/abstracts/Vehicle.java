@@ -1,6 +1,9 @@
 package ca.senecapolytechnic.abstracts;
 
-public abstract class Vehicle implements Comparable<Vehicle> {
+import ca.senecapolytechnic.interfaces.IVehicleMaintenance;
+import ca.senecapolytechnic.interfaces.IVehicleOperations;
+
+public abstract class Vehicle implements Comparable<Vehicle>, IVehicleOperations, IVehicleMaintenance {
     private String name;
     private double purchasePrice;
     private int currentMileage;
@@ -37,6 +40,35 @@ public abstract class Vehicle implements Comparable<Vehicle> {
         return Integer.compare(thisMilesRemaining, otherMilesRemaining);
     }
 
+    public void setServiceInterval(int serviceInterval) {
+        this.serviceInterval = serviceInterval;
+    }
 
+    public void setMaintenanceCost(double maintenanceCost) {
+        this.maintenanceCost = maintenanceCost;
+    }
 
+    public void setPrimaryFunction(String primaryFunction) {
+        this.primaryFunction = primaryFunction;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public String getPrimaryFunction() {
+        return primaryFunction;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public int getServiceInterval() {
+        return serviceInterval;
+    }
+
+    public double getMaintenanceCost() {
+        return maintenanceCost;
+    }
 }
