@@ -29,8 +29,7 @@ public abstract class Vehicle implements Comparable<Vehicle>, IVehicleOperations
     }
 
     public String toString(){
-        return name + " - $" + String.format("%.2f", purchasePrice);
-
+        return name + " - $" + String.format("%,.1f", purchasePrice);
     }
 
     @Override
@@ -39,6 +38,8 @@ public abstract class Vehicle implements Comparable<Vehicle>, IVehicleOperations
         int otherMilesRemaining = other.serviceInterval - other.currentMileage;
         return Integer.compare(thisMilesRemaining, otherMilesRemaining);
     }
+
+    public String getName(){ return name; }
 
     public void setServiceInterval(int serviceInterval) {
         this.serviceInterval = serviceInterval;
