@@ -3,7 +3,7 @@ package ca.senecapolytechnic.views;
 import ca.senecapolytechnic.abstracts.Vehicle;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class FleetView {
     public void displayMileagePrompt(String vehicleName) {

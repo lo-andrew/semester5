@@ -60,10 +60,10 @@ public class FleetController {
                 input = scanner.nextLine();
             }
             mileage = Integer.parseInt(input);
-            if (mileage <= 0) {
-                view.displayError("Mileage cannot be negative or zero. Please try again.");
+            if (mileage < 0) {
+                view.displayError("Mileage cannot be negative. Please try again.");
             }
-        } while (mileage <= 0);
+        } while (mileage < 0);
         return mileage;
     }
 
