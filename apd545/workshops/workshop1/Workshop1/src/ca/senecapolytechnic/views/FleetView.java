@@ -6,24 +6,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FleetView {
-    private Scanner scanner = new Scanner(System.in);
-
-    public int getMileageInput(String vehicleName) {
-        int mileage;
-        do {
-            System.out.print("Enter the current mileage for " + vehicleName + " (km): ");
-            while (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Please enter a positive integer.");
-                scanner.next();
-            }
-            mileage = scanner.nextInt();
-            scanner.nextLine();
-            if (mileage <= 0) {
-                System.out.println("Mileage cannot be negative or zero. Please try again.");
-            }
-        } while (mileage <= 0);
-        return mileage;
+    public void displayMileagePrompt(String vehicleName) {
+        System.out.print("Enter the current mileage for " + vehicleName + " (km): ");
     }
+
+    public void displayCategoryPrompt() {
+        System.out.print("Enter a vehicle category (PassengerVehicles, CommercialVehicles, SpecializedVehicles): ");
+    }
+
 
     public void displayMaintenanceResult(Vehicle v){
         System.out.println("The vehicle requiring the most urgent maintenance is: " + v.getName());
@@ -38,18 +28,6 @@ public class FleetView {
         fleet.forEach(v -> {
             System.out.println(v.toString());
         });
-    }
-
-    public String getVehicleCategory() {
-        String category;
-        do {
-            System.out.print("Enter a vehicle category (PassengerVehicles, CommercialVehicles, SpecializedVehicles): ");
-            category = scanner.nextLine().trim();
-            if (!category.equals("PassengerVehicles") && !category.equals("CommercialVehicles") && !category.equals("SpecializedVehicles")) {
-                System.out.println("Invalid category. Please enter one of: PassengerVehicles, CommercialVehicles, SpecializedVehicles.");
-            }
-        } while (!category.equals("PassengerVehicles") && !category.equals("CommercialVehicles") && !category.equals("SpecializedVehicles"));
-        return category;
     }
 
     public void displayCategoryResults (ArrayList<Vehicle> filtered, String category){
@@ -70,4 +48,9 @@ public class FleetView {
                     remaining);
         }
     }
+
+    public void displayError(String message) {
+        System.out.println(message);
+    }
+
 }

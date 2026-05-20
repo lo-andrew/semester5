@@ -6,10 +6,14 @@ import ca.senecapolytechnic.models.*;
 import ca.senecapolytechnic.views.FleetView;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class FleetController {
     private ArrayList<Vehicle> fleet = new ArrayList<>();
     private FleetView view = new FleetView();
+
+    private Scanner scanner = new Scanner(System.in);
+
 
     public void findMostUrgentMaintenance(){
         Vehicle mostUrgent = fleet.get(0);
@@ -27,7 +31,7 @@ public class FleetController {
     }
 
     public void getVehiclesInCategory(){
-        String vehicleCategory = view.getVehicleCategory();
+        String vehicleCategory = getValidCategory();
         IVehicleFilter filter = (v) -> v.getCategory().equals(vehicleCategory);
 
         ArrayList<Vehicle> filtered = new ArrayList<>();
@@ -45,13 +49,43 @@ public class FleetController {
         view.displayMaintenanceUrgency(vehicleArray);
     }
 
+    private int getValidMileage(String vehicleName) {
+        int mileage;
+        do {
+            view.displayMileagePrompt(vehicleName);
+            String input = scanner.nextLine();
+            while (!input.matches("\\d+")) {
+                view.displayError("Invalid input. Please enter a positive integer.");
+                view.displayMileagePrompt(vehicleName);
+                input = scanner.nextLine();
+            }
+            mileage = Integer.parseInt(input);
+            if (mileage <= 0) {
+                view.displayError("Mileage cannot be negative or zero. Please try again.");
+            }
+        } while (mileage <= 0);
+        return mileage;
+    }
+
+    private String getValidCategory() {
+        String category;
+        do {
+            view.displayCategoryPrompt();
+            category = scanner.nextLine().trim();
+            if (!category.equals("PassengerVehicles") && !category.equals("CommercialVehicles") && !category.equals("SpecializedVehicles")) {
+                view.displayError("Invalid category. Please enter one of: PassengerVehicles, CommercialVehicles, SpecializedVehicles.");
+            }
+        } while (!category.equals("PassengerVehicles") && !category.equals("CommercialVehicles") && !category.equals("SpecializedVehicles"));
+        return category;
+    }
+
     public void start() {
         System.out.println("--: Requirement 1 :--");
-        fleet.add(new Sedan(view.getMileageInput("Sedan")));
-        fleet.add(new SUV(view.getMileageInput("SUV")));
-        fleet.add(new Truck(view.getMileageInput("Truck")));
-        fleet.add(new Van(view.getMileageInput("Van")));
-        fleet.add(new Ambulance(view.getMileageInput("Ambulance")));
+        fleet.add(new Sedan(getValidMileage("Sedan")));
+        fleet.add(new SUV(getValidMileage("SUV")));
+        fleet.add(new Truck(getValidMileage("Truck")));
+        fleet.add(new Van(getValidMileage("Van")));
+        fleet.add(new Ambulance(getValidMileage("Ambulance")));
 
         System.out.println("\n--: Requirement 2 :--");
         findMostUrgentMaintenance();
