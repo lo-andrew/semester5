@@ -1,0 +1,31 @@
+workshop 1 reflection
+
+In this workshop, we developed a program to manage a fleet of vehicles. 
+
+Using the Model View Controller (MVC) design pattern, it helped to organize my the application's
+functionality into different sections. The Model portion of the MVC design pattern helped to
+organize the code that would model all the data. This meant that we would have to model the 
+different vehicles using some sort of reusable code. Creating a hierarchical structure of 
+Vehicles and categories and their concrete classes helped to organize the code into unique sections
+that define the object and would reduce the amount of copy and pasted code we would have to write.
+
+Separating out the view and controller to handle output formatting and business logic respectively 
+also helped to organize the code in a way that different input and display logic could be reused 
+without having to rewrite code again and again. The design pattern really helped to shape how the
+code would flow and where things belong, but it can be a little confusing at times. 
+
+When implementing the class heirarchy, some of the challenges that came about were deciding where
+things belong. I had to figure out which fields and methods are abstract and which ones are subclasses.
+I was particularly confused about the getCategory, I wasn't sure at first if the abstract class 
+CommercialVehicle, PassengerVehicle and SpecializedVehicle level should handle it or the concrete classes.
+
+Another challenge was constructor chaining. Ensuring that the super() calls are correct throughout the 
+heirarchy was tricky at first since I got some compilation errors.
+
+Using the Comparable interface made ordering and sorting so much easier. Reading up on the comparable
+interface, I could call .sort() or use the compareTo() to be able to directly compare custom types.
+This made things simplier and I thought it would be much more coding to access properties and compare.
+
+The functional interface and lambda were able to reduce the amount of manual code needed for sorting and
+filtering. For the IVehicleFilter, i was able to call a lambda in the conroller to filter out vehicles.
+This made the code cleaner and easier to write out.

@@ -1,3 +1,14 @@
+/***********************************************
+ Workshop # 1
+ Course: APD545 NBB - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ This assignment represents my own work in accordance
+ with Seneca Academic Policy.
+ Date: May 20th, 2026
+ ***********************************************/
+
 package ca.senecapolytechnic.controllers;
 
 import ca.senecapolytechnic.abstracts.Vehicle;
@@ -14,7 +25,31 @@ public class FleetController {
 
     private Scanner scanner = new Scanner(System.in);
 
+    // requirement 1
+    public int getValidMileage(String vehicleName) {
+        int mileage = -1;
+        boolean isValid = false;
 
+        do {
+            view.displayMileagePrompt(vehicleName);
+            String input = scanner.nextLine();
+
+            try { // get integer input
+                mileage = Integer.parseInt(input);
+                if (mileage < 0) {
+                    view.displayNegativeMileageError();
+                } else {
+                    isValid = true;
+                }
+            } catch (NumberFormatException e) {
+                view.displayInvalidMileageError();
+            }
+        } while (!isValid);
+
+        return mileage;
+    }
+
+    // requirement 2
     public void findMostUrgentMaintenance(){
         Vehicle mostUrgent = fleet.get(0);
         for(Vehicle v : fleet){
@@ -25,13 +60,16 @@ public class FleetController {
         view.displayMaintenanceResult(mostUrgent);
     }
 
+    // requirement 3
     public void findPurchasePriceOrder(){
         fleet.sort((a, b) -> Double.compare(b.getPurchasePrice(), a.getPurchasePrice()));
         view.displayDescPriceFleet(fleet);
     }
 
+    // requirement 4
     public void getVehiclesInCategory(){
         String vehicleCategory = getValidCategory();
+        // lambda to get category equal to one from user
         IVehicleFilter filter = (v) -> v.getCategory().equals(vehicleCategory);
 
         ArrayList<Vehicle> filtered = new ArrayList<>();
@@ -43,60 +81,43 @@ public class FleetController {
         view.displayCategoryResults(filtered, vehicleCategory);
     }
 
-    public void getVehicleMaintenanceUrgency(){
-        Vehicle[] vehicleArray = fleet.toArray(new Vehicle[0]);
-        Arrays.sort(vehicleArray, (a, b) -> a.compareTo(b));
-        view.displayMaintenanceUrgency(vehicleArray);
-    }
-
-    private int getValidMileage(String vehicleName) {
-        int mileage;
-        do {
-            view.displayMileagePrompt(vehicleName);
-            String input = scanner.nextLine();
-            while (!input.matches("\\d+")) {
-                view.displayError("Invalid input. Please enter a positive integer.");
-                view.displayMileagePrompt(vehicleName);
-                input = scanner.nextLine();
-            }
-            mileage = Integer.parseInt(input);
-            if (mileage < 0) {
-                view.displayError("Mileage cannot be negative. Please try again.");
-            }
-        } while (mileage < 0);
-        return mileage;
-    }
-
     private String getValidCategory() {
         String category;
         do {
             view.displayCategoryPrompt();
             category = scanner.nextLine().trim();
             if (!category.equals("PassengerVehicles") && !category.equals("CommercialVehicles") && !category.equals("SpecializedVehicles")) {
-                view.displayError("Invalid category. Please enter one of: PassengerVehicles, CommercialVehicles, SpecializedVehicles.");
+                view.displayInvalidCategoryError();
             }
         } while (!category.equals("PassengerVehicles") && !category.equals("CommercialVehicles") && !category.equals("SpecializedVehicles"));
         return category;
     }
 
+    // requirement 5 and 6
+    public void getVehicleMaintenanceUrgency(){
+        Vehicle[] vehicleArray = fleet.toArray(new Vehicle[0]);
+        Arrays.sort(vehicleArray, (a, b) -> a.compareTo(b));
+        view.displayMaintenanceUrgency(vehicleArray);
+    }
+
     public void start() {
-        System.out.println("--: Requirement 1 :--");
+        view.displayRequirement(1);
         fleet.add(new Sedan(getValidMileage("Sedan")));
         fleet.add(new SUV(getValidMileage("SUV")));
         fleet.add(new Truck(getValidMileage("Truck")));
         fleet.add(new Van(getValidMileage("Van")));
         fleet.add(new Ambulance(getValidMileage("Ambulance")));
 
-        System.out.println("\n--: Requirement 2 :--");
+        view.displayRequirement(2);
         findMostUrgentMaintenance();
 
-        System.out.println("\n--: Requirement 3 :--\n");
+        view.displayRequirement(3);
         findPurchasePriceOrder();
 
-        System.out.println("\n--: Requirement 4 :--");
+        view.displayRequirement(4);
         getVehiclesInCategory();
 
-        System.out.println("\n--: Requirement 5 & 6 :--");
+        view.displayRequirement(5);
         getVehicleMaintenanceUrgency();
     }
 }

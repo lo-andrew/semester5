@@ -1,3 +1,14 @@
+/***********************************************
+ Workshop # 1
+ Course: APD545 NBB - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ This assignment represents my own work in accordance
+ with Seneca Academic Policy.
+ Date: May 20th, 2026
+ ***********************************************/
+
 package ca.senecapolytechnic.views;
 
 import ca.senecapolytechnic.abstracts.Vehicle;
@@ -49,8 +60,25 @@ public class FleetView {
         }
     }
 
-    public void displayError(String message) {
-        System.out.println(message);
+    public void displayInvalidMileageError() {
+        System.out.println("Invalid input. Please enter a positive integer.");
+    }
+
+    public void displayNegativeMileageError() {
+        System.out.println("Mileage cannot be negative or zero. Please try again.");
+    }
+
+    public void displayInvalidCategoryError() {
+        System.out.println("Invalid category. Please enter one of: PassengerVehicles, CommercialVehicles, SpecializedVehicles.");
+    }
+
+    public void displayRequirement(int req) {
+        if (req == 5){
+            System.out.println("\n--: Requirement " + req + " & 6 :--");
+
+        } else {
+            System.out.println("\n--: Requirement " + req + " :--");
+        }
     }
 
 }
