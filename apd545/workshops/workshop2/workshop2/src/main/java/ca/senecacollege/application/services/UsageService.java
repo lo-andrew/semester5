@@ -13,9 +13,9 @@ public class UsageService {
 
     }
 
-    public List<UsageLog> getLogs(Vehicle v){
-
-    }
+//    public List<UsageLog> getLogs(Vehicle v){
+//
+//    }
 
 
 }
