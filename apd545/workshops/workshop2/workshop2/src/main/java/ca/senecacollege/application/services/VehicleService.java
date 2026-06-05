@@ -12,7 +12,7 @@ public class VehicleService {
 
     }
 
-    public List<Vehicle> getAllVehicles(){
-
-    }
+//    public List<Vehicle> getAllVehicles(){
+//
+//    }
 }

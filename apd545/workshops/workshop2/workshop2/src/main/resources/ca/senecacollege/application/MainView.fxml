@@ -14,6 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<!-- add close button to summary and dynamic label for main window-->
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.controllers.MainController">
    <left>
       <VBox prefHeight="800.0" prefWidth="252.0" spacing="10.0" BorderPane.alignment="TOP_LEFT">
@@ -31,12 +33,13 @@
    <center>
       <StackPane fx:id="centerPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane alignment="CENTER" visible="false">
+            <GridPane fx:id="addVehicleForm" alignment="CENTER" visible="false">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="169.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="814.0" minWidth="10.0" prefWidth="779.0" />
               </columnConstraints>
               <rowConstraints>
+                  <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
@@ -44,7 +47,7 @@
                   <RowConstraints maxHeight="433.0" minHeight="10.0" prefHeight="391.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" text="Make" GridPane.halignment="RIGHT">
+                  <Label alignment="CENTER" text="Make" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -52,7 +55,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Model" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" text="Model" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -60,7 +63,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Year" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                  <Label alignment="CENTER" text="Year" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -68,7 +71,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Type" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                  <Label alignment="CENTER" text="Type" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -76,26 +79,31 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="779.0" GridPane.columnIndex="1">
+                  <TextField fx:id="vehicleMake" prefHeight="40.0" prefWidth="779.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="vehicleModel" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="vehicleYear" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Add Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <ComboBox prefHeight="25.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="addVehicleBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addVehicle" prefHeight="25.0" prefWidth="125.0" text="Add Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="vehicleType" prefHeight="25.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="189.0" text="Add Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
-            <GridPane alignment="CENTER" visible="false">
+            <GridPane fx:id="addUsageForm" alignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="169.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="814.0" minWidth="10.0" prefWidth="779.0" />
@@ -105,10 +113,11 @@
                   <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label alignment="CENTER" text="Select Vehicle" GridPane.halignment="RIGHT">
+                  <Label alignment="CENTER" text="Select Vehicle" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -116,7 +125,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Start Date" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" text="Start Date" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -124,7 +133,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="End Date" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                  <Label alignment="CENTER" text="End Date" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -132,7 +141,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="KM Driven" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                  <Label alignment="CENTER" text="KM Driven" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -140,18 +149,23 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="602.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="usageDistance" prefHeight="40.0" prefWidth="602.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="125.0" text="Save Usage Log" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <ComboBox prefHeight="25.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="saveUsageBtn" mnemonicParsing="false" onAction="#saveUsageRecord" prefHeight="42.0" prefWidth="125.0" text="Save Usage Log" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="usageVehicle" prefHeight="25.0" prefWidth="350.0" promptText="select vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="usageStart" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="usageEnd" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Label text="Add Usage Log" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
-            <GridPane alignment="CENTER" layoutX="10.0" layoutY="10.0">
+            <GridPane fx:id="addMaintenanceForm" alignment="CENTER" layoutX="10.0" layoutY="10.0" visible="false">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="169.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="814.0" minWidth="10.0" prefWidth="779.0" />
@@ -161,10 +175,11 @@
                   <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label alignment="CENTER" GridPane.halignment="RIGHT">
+                  <Label alignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -172,7 +187,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Date" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" text="Date" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -180,7 +195,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Description" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                  <Label alignment="CENTER" text="Description" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -188,7 +203,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Cost" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                  <Label alignment="CENTER" text="Cost" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -196,19 +211,24 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="602.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="maintenanceCost" prefHeight="40.0" prefWidth="602.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="175.0" text="Save Record" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <ComboBox prefHeight="39.0" prefWidth="350.0" promptText="Select Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="saveMaintenanceBtn" mnemonicParsing="false" onAction="#saveMaintenanceRecord" prefHeight="42.0" prefWidth="175.0" text="Save Record" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="maintenanceVehicle" prefHeight="39.0" prefWidth="350.0" promptText="Select Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="maintenanceDate" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <TextField fx:id="maintenanceDesc" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
                   </TextField>
+                  <Label text="Add Maintenance Record" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </children>
