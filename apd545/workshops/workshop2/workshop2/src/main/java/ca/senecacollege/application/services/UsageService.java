@@ -4,11 +4,12 @@ import ca.senecacollege.application.models.UsageLog;
 import ca.senecacollege.application.models.Vehicle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class UsageService {
-    private Map<Vehicle, List<UsageLog>> dataStore;
+    private Map<Vehicle, List<UsageLog>> dataStore = new HashMap<>();
 
     public void addLog(Vehicle v, UsageLog log){
         if(!dataStore.containsKey(v)){
@@ -20,6 +21,4 @@ public class UsageService {
     public List<UsageLog> getLogs(Vehicle v){
         return dataStore.get(v);
     }
-
-
 }

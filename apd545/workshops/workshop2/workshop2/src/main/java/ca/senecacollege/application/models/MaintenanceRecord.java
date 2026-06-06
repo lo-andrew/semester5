@@ -3,14 +3,24 @@ package ca.senecacollege.application.models;
 import java.time.LocalDate;
 
 public class MaintenanceRecord {
+    private Vehicle vehicle;
     private LocalDate date;
     private double cost;
     private String description;
 
-    public MaintenanceRecord(LocalDate date, double cost, String description) {
+    public MaintenanceRecord(Vehicle vehicle, LocalDate date, double cost, String description) {
+        this.vehicle = vehicle;
         this.date = date;
         this.cost = cost;
         this.description = description;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public LocalDate getDate() {

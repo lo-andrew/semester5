@@ -7,5 +7,6 @@ module ca.senecacollege.application.workshop2 {
     exports ca.senecacollege.application;
     exports ca.senecacollege.application.controllers;
     opens ca.senecacollege.application.controllers to javafx.fxml;
-
+    opens ca.senecacollege.application.models to javafx.base;
+    exports ca.senecacollege.application.models;
 }

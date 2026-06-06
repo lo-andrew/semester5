@@ -8,25 +8,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" spacing="30.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" spacing="30.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.controllers.SummaryController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="459.0" text="Summary" VBox.vgrow="NEVER">
          <font>
             <Font size="31.0" />
          </font>
       </Label>
-      <ComboBox prefHeight="25.0" prefWidth="359.0" promptText="Select Data Type" VBox.vgrow="NEVER" />
-      <TableView prefHeight="730.0" prefWidth="250.0" VBox.vgrow="NEVER">
-        <columns>
-          <TableColumn prefWidth="379.0" text="Make" />
-          <TableColumn minWidth="0.0" prefWidth="283.0" text="Model" />
-            <TableColumn prefWidth="137.0" text="Year" />
-            <TableColumn prefWidth="370.0" text="Type" />
-        </columns>
+      <ComboBox fx:id="dataTypeCombo" prefHeight="25.0" prefWidth="359.0" promptText="Select Data Type" VBox.vgrow="NEVER" />
+      <TableView fx:id="summaryTable" prefHeight="730.0" prefWidth="250.0" VBox.vgrow="NEVER">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="closeBtn" mnemonicParsing="false" text="close" translateY="-12.0" />
+      <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#closeSummary" text="close" translateY="-12.0" />
    </children>
 </VBox>

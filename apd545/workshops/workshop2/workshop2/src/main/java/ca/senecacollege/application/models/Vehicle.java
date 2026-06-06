@@ -47,12 +47,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "make='" + make + '\'' +
-                ", model='" + model + '\'' +
-                ", year=" + year +
-                ", type='" + type + '\'' +
-                '}';
+        return year + " " + make + " " + model;
     }
 
 }

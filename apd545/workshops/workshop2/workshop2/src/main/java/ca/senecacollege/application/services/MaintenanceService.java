@@ -4,11 +4,12 @@ import ca.senecacollege.application.models.MaintenanceRecord;
 import ca.senecacollege.application.models.Vehicle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MaintenanceService {
-    private Map<Vehicle, List<MaintenanceRecord>> dataStore;
+    private Map<Vehicle, List<MaintenanceRecord>> dataStore = new HashMap<>();
 
     public void addRecord(Vehicle v, MaintenanceRecord r){
         if (!dataStore.containsKey(v)) {
@@ -19,6 +20,5 @@ public class MaintenanceService {
 
     public List<MaintenanceRecord> getRecords(Vehicle v){
         return dataStore.get(v);
-
     }
 }
