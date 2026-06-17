@@ -1,0 +1,49 @@
+APD545 Workshop 2 Reflection
+Andrew Lo
+162539217
+
+youtube link:
+https://youtu.be/vcCxmNjcAfw
+
+
+The service layer ensured scalability. Since the data is stored in the service layer and not mushed together
+in the controllers, adding new windows or controllers would mean that I don't have to touch the data logic.
+If for example, I wanted a third window to display extra details, I could pass those service objects directly
+just like how the MainController passes it to the Summary Controller. This method could be used similarly in
+other uses:
+
+	FXML
+    public void onOpenSummary() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ca/senecacollege/application/SummaryView.fxml"));
+            Parent root = loader.load();
+
+            SummaryController summaryController = loader.getController();
+            summaryController.setServices(vService, mService, uService);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Summary");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+
+I think one of the hardest things for me for this workshop was using the PropertyValueFactory for the Table View.
+As one of the few examples seen when searching for Tables in JavaFX, at first, it was a little hard to grasp, but
+understanding that it is essentially boilerplate to call the object's getters made it easier to understand after. 
+
+The real data challenge was passing the windows without creating new service instances. SummmaryController needed
+access to the same data that was entered in the MainView/MainController. This was done by passing in references 
+through setServices. This way, the SummaryView/SummaryController had access to the same data.
+
+
+
+I think that my solution balances usability with the StackPane. Instead of having separate windows pop out each time
+for field entry, having separate tabs that the user can switch through feels more intuitive and makes navigation
+easier. Another efficiency is the TableView used in the SummaryView. The table is dynamic and rebuilds the columns
+based on the user selection. I thought that this would be better than having different data types that are hidden
+and shown each time. This could be scaled, as adding more data types would mean the table just has to be passed
+the new columns, and there would be no need to add another view that hides or shows. 

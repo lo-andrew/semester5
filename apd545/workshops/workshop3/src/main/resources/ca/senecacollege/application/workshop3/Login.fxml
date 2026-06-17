@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+
+    <VBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 40; -fx-text-fill: black;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Log In" />
+
+        <VBox spacing="4">
+            <Label text="Username" />
+            <TextField fx:id="txtUsername" maxWidth="400.0" prefHeight="25.0" prefWidth="400.0" promptText="Username" />
+        </VBox>
+
+        <VBox spacing="4">
+            <Label text="Password" />
+            <PasswordField fx:id="txtPassword" maxWidth="400.0" promptText="Password" />
+            <Label fx:id="lblError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
+        </VBox>
+
+        <Button fx:id="btnLogin" maxWidth="400.0" onAction="#handleLogin" text="Log In" />
+
+        <HBox alignment="CENTER_LEFT" spacing="4">
+            <Label text="Don't have an account?" />
+            <Hyperlink fx:id="linkSignup" onAction="#handleGoToSignup" text="Sign up" />
+        </HBox>
+    </VBox>
+</AnchorPane>

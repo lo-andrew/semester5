@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1115.0" prefWidth="1200" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+
+    <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+        <!-- Toolbar -->
+        <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 10 16 10 16; -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0;">
+            <Label fx:id="lblWelcome" style="-fx-font-weight: bold; -fx-text-fill: black;" text="Welcome" />
+            <Button fx:id="btnNavCustomer" onAction="#scrollToCustomer" text="Customer" />
+            <Button fx:id="btnNavVehicle" onAction="#scrollToVehicle" text="Vehicle" />
+            <Button fx:id="btnNavLoan" onAction="#scrollToLoan" text="Loan" />
+            <Button fx:id="btnNavSaved" onAction="#scrollToSaved" text="Saved Rates" />
+        </HBox>
+
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+
+            <VBox spacing="20" style="-fx-padding: 20;">
+
+                <!-- Customer Information -->
+                <VBox fx:id="sectionCustomer" spacing="10">
+                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;" text="Customer Information" />
+
+                    <GridPane hgap="16" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                        </columnConstraints>
+
+                        <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <Label style="-fx-text-fill: black;" text="Full Name" />
+                            <TextField fx:id="txtName" promptText="Full name" />
+                            <Label fx:id="lblNameError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
+                        </VBox>
+
+                        <VBox spacing="4" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <Label style="-fx-text-fill: black;" text="Phone Number" />
+                            <TextField fx:id="txtPhone" promptText="(416) 555-0000" />
+                            <Label fx:id="lblPhoneError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
+                        </VBox>
+
+                        <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <Label style="-fx-text-fill: black;" text="City" />
+                            <TextField fx:id="txtCity" promptText="City" />
+                            <Label fx:id="lblCityError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
+                        </VBox>
+
+                        <VBox spacing="4" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <Label style="-fx-text-fill: black;" text="Province" />
+                            <ComboBox fx:id="cmbProvince" maxWidth="Infinity" promptText="Select province" />
+                            <Label fx:id="lblProvinceError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
+                        </VBox>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
+                    </GridPane>
+                </VBox>
+
+                <!-- Vehicle Information -->
+                <VBox fx:id="sectionVehicle" spacing="10">
+                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;" text="Vehicle Information" />
+
+                    <VBox spacing="10">
+                        <VBox spacing="6">
+                            <Label style="-fx-text-fill: black;" text="Vehicle Type" />
+                            <HBox spacing="12">
+                                <RadioButton fx:id="rbCar" selected="true" text="Car" style="-fx-text-fill: black;">
+                                    <toggleGroup><ToggleGroup fx:id="tgVehicleType" /></toggleGroup>
+                                </RadioButton>
+                                <RadioButton fx:id="rbTruck" text="Truck" toggleGroup="$tgVehicleType" style="-fx-text-fill: black;" />
+                                <RadioButton fx:id="rbVan" text="Family Van" toggleGroup="$tgVehicleType" style="-fx-text-fill: black;"/>
+                            </HBox>
+                            <Label fx:id="lblVehicleTypeError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
+                        </VBox>
+
+                        <VBox spacing="6">
+                            <Label style="-fx-text-fill: black;" text="Vehicle Age" />
+                            <HBox spacing="12">
+                                <RadioButton fx:id="rbNew" selected="true" text="New" style="-fx-text-fill: black;">
+                                    <toggleGroup><ToggleGroup fx:id="tgVehicleAge" /></toggleGroup>
+                                </RadioButton>
+                                <RadioButton fx:id="rbUsed" text="Used" toggleGroup="$tgVehicleAge" style="-fx-text-fill: black;"/>
+                            </HBox>
+                        </VBox>
+
+                        <VBox spacing="4">
+                            <Label style="-fx-text-fill: black;" text="Vehicle Price" />
+                            <TextField fx:id="txtVehiclePrice" prefWidth="200" promptText="e.g. 32500.00" />
+                            <Label fx:id="lblPriceError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
+                        </VBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Loan Information -->
+                <VBox fx:id="sectionLoan" spacing="10">
+                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;" text="Loan Information" />
+
+                    <VBox spacing="12">
+                        <GridPane hgap="16" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="ALWAYS" percentWidth="40" />
+                                <ColumnConstraints hgrow="ALWAYS" percentWidth="60" />
+                            </columnConstraints>
+
+                            <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                <Label style="-fx-text-fill: black;" text="Down Payment" />
+                                <TextField fx:id="txtDownPayment" promptText="e.g. 5000.00" />
+                                <Label fx:id="lblDownPaymentError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
+                            </VBox>
+
+                            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                <Label style="-fx-text-fill: black;" text="Interest Rate" />
+                                <HBox spacing="12">
+                                    <RadioButton fx:id="rb099" text="0.99%" style="-fx-text-fill: black;">
+                                        <toggleGroup><ToggleGroup fx:id="tgInterestRate" /></toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rb199" selected="true" text="1.99%" toggleGroup="$tgInterestRate" style="-fx-text-fill: black;"/>
+                                    <RadioButton fx:id="rb299" text="2.99%" toggleGroup="$tgInterestRate" style="-fx-text-fill: black;"/>
+                                    <RadioButton fx:id="rbOther" text="Other" toggleGroup="$tgInterestRate" style="-fx-text-fill: black;"/>
+                                </HBox>
+                                <TextField fx:id="txtCustomRate" managed="false" prefWidth="120" promptText="Enter rate %" visible="false" />
+                            </VBox>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+                        </GridPane>
+
+                        <!-- Duration -->
+                        <VBox spacing="6">
+                            <HBox alignment="CENTER_LEFT" spacing="8">
+                                <Label style="-fx-text-fill: black;" text="Loan Duration:" />
+                                <Label fx:id="lblDurationValue" style="-fx-font-weight: bold; -fx-text-fill: black;" text="60 months" />
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label style="-fx-text-fill: black;" text="12" />
+                                <Slider fx:id="sliderDuration" blockIncrement="1" max="96" min="12" onMouseClicked="#handleDurationChange" onMouseDragged="#handleDurationChange" value="60" HBox.hgrow="ALWAYS" />
+                                <Label style="-fx-text-fill: black;" text="96" />
+                            </HBox>
+                        </VBox>
+
+                        <!-- Payment frequency -->
+                        <VBox spacing="6">
+                            <Label style="-fx-text-fill: black;" text="Payment Frequency" />
+                            <HBox spacing="12">
+                                <RadioButton fx:id="rbWeekly" text="Weekly" style="-fx-text-fill: black;">
+                                    <toggleGroup><ToggleGroup fx:id="tgFrequency" /></toggleGroup>
+                                </RadioButton>
+                                <RadioButton fx:id="rbBiweekly" selected="true" text="Bi-weekly" toggleGroup="$tgFrequency" style="-fx-text-fill: black;" />
+                                <RadioButton fx:id="rbMonthly" text="Monthly" toggleGroup="$tgFrequency"  style="-fx-text-fill: black;"/>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Estimated payment -->
+                        <HBox alignment="CENTER_LEFT" spacing="16" style="-fx-padding: 10; -fx-border-color: #cccccc; -fx-border-width: 1;">
+                            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                <Label style="-fx-text-fill: black;" text="Estimated Payment" />
+                                <Label fx:id="lblFrequencyDesc" style="-fx-font-size: 11px; -fx-text-fill: black;" text="Bi-weekly · 60 months · 1.99% APR" />
+                            </VBox>
+                            <Label fx:id="lblEstimatedPayment" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: black;" text="\$0.00" />
+                        </HBox>
+
+                        <!-- Buttons -->
+                        <HBox spacing="8">
+                            <Button fx:id="btnClear" maxWidth="Infinity" onAction="#handleClear" text="Clear" HBox.hgrow="ALWAYS" />
+                            <Button fx:id="btnCalculate" maxWidth="Infinity" onAction="#handleCalculate" text="Calculate" HBox.hgrow="ALWAYS" />
+                            <Button fx:id="btnSaveRate" maxWidth="Infinity" onAction="#handleSaveRate" text="Save Rate" HBox.hgrow="ALWAYS" />
+                            <Button fx:id="btnViewAmortization" maxWidth="Infinity" onAction="#handleViewAmortization" text="View Amortization" HBox.hgrow="ALWAYS" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Saved Rates -->
+                <VBox fx:id="sectionSaved" spacing="10">
+                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: black;" text="Saved Rates" />
+                    <Label style="-fx-font-size: 12px; -fx-text-fill: black;" text="Select a saved rate to reload it into the form." />
+                    <ListView fx:id="listSavedRates" prefHeight="140" />
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</AnchorPane>

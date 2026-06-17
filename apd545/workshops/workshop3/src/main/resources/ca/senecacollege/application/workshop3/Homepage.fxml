@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomepageController">
+
+    <VBox alignment="CENTER_LEFT" spacing="16" style="-fx-padding: 48; -fx-text-fill: black;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+        <Label style="-fx-font-size: 26px; -fx-font-weight: bold;" text="AutoLoan" />
+        <Label style="-fx-font-size: 13px;" text="See every payment broken down by principal and interest." />
+
+        <HBox spacing="12">
+            <Button fx:id="btnSignup" onAction="#handleSignup" text="Get Started" />
+            <Button fx:id="btnLogin" onAction="#handleLogin" text="Log In" />
+        </HBox>
+    </VBox>
+</AnchorPane>

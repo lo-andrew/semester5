@@ -5,16 +5,16 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<!-- add close button to summary and dynamic label for main window-->
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.controllers.MainController">
     <left>
@@ -23,17 +23,16 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
             <children>
-                <Button fx:id="btnAddVehicle" mnemonicParsing="false" onAction="#showAddVehicleForm" prefHeight="25.0" prefWidth="200.0" text="Add Vehicle" />
-                <Button fx:id="btnAddUsage" mnemonicParsing="false" onAction="#showAddUsageForm" prefHeight="25.0" prefWidth="200.0" text="Add Usage Log" />
-                <Button fx:id="btnAddMaintenance" mnemonicParsing="false" onAction="#showAddMaintenanceForm" prefHeight="25.0" prefWidth="200.0" text="Add Maintenance" />
-                <Button fx:id="btnViewSummary" mnemonicParsing="false" onAction="#openSummary" prefHeight="25.0" prefWidth="200.0" text="View Summary" />
+                <Button fx:id="btnViewSummary" mnemonicParsing="false" onAction="#onOpenSummary" prefHeight="25.0" prefWidth="200.0" text="View Summary" />
             </children>
         </VBox>
     </left>
     <center>
-        <StackPane fx:id="centerPane" prefHeight="600.0" prefWidth="950.0" BorderPane.alignment="CENTER">
-            <children>
-                <GridPane fx:id="addVehicleForm" alignment="CENTER" prefHeight="518.0" prefWidth="843.0" visible="false">
+        <TabPane prefHeight="600.0" prefWidth="950.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Add Vehicle">
+                    <content>
+                        <GridPane fx:id="addVehicleForm" alignment="CENTER" prefHeight="518.0" prefWidth="843.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="169.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="814.0" minWidth="10.0" prefWidth="779.0" />
@@ -82,7 +81,7 @@
                         <TextField fx:id="vehicleMake" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <TextField fx:id="vehicleModel" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <TextField fx:id="vehicleYear" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                        <Button fx:id="addVehicleBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addVehicle" prefHeight="42.0" prefWidth="175.0" text="Add Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Button fx:id="addVehicleBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSaveVehicle" prefHeight="42.0" prefWidth="175.0" text="Add Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                         <ComboBox fx:id="vehicleType" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="189.0" text="Add Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
                             <font>
@@ -93,8 +92,12 @@
                     <padding>
                         <Insets right="20.0" />
                     </padding>
-                </GridPane>
-                <GridPane fx:id="addUsageForm" alignment="CENTER" prefHeight="518.0" prefWidth="843.0">
+                        </GridPane>
+                    </content>
+                </Tab>
+                <Tab text="Add Usage Log">
+                    <content>
+                        <GridPane fx:id="addUsageForm" alignment="CENTER" prefHeight="518.0" prefWidth="843.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="169.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="814.0" minWidth="10.0" prefWidth="779.0" />
@@ -141,7 +144,7 @@
                             </font>
                         </Label>
                         <TextField fx:id="usageDistance" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                        <Button fx:id="saveUsageBtn" mnemonicParsing="false" onAction="#saveUsageRecord" prefHeight="42.0" prefWidth="175.0" text="Save Usage Log" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Button fx:id="saveUsageBtn" mnemonicParsing="false" onAction="#onSaveUsage" prefHeight="42.0" prefWidth="175.0" text="Save Usage Log" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                         <ComboBox fx:id="usageVehicle" prefHeight="40.0" prefWidth="350.0" promptText="select vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <DatePicker fx:id="usageStart" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <DatePicker fx:id="usageEnd" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
@@ -154,8 +157,12 @@
                     <padding>
                         <Insets right="20.0" />
                     </padding>
-                </GridPane>
-                <GridPane fx:id="addMaintenanceForm" alignment="CENTER" prefHeight="518.0" prefWidth="843.0" visible="false">
+                        </GridPane>
+                    </content>
+                </Tab>
+                <Tab text="Add Maintenance">
+                    <content>
+                        <GridPane fx:id="addMaintenanceForm" alignment="CENTER" prefHeight="518.0" prefWidth="843.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="169.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="814.0" minWidth="10.0" prefWidth="779.0" />
@@ -202,7 +209,7 @@
                             </font>
                         </Label>
                         <TextField fx:id="maintenanceCost" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                        <Button fx:id="saveMaintenanceBtn" mnemonicParsing="false" onAction="#saveMaintenanceRecord" prefHeight="42.0" prefWidth="175.0" text="Save Record" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Button fx:id="saveMaintenanceBtn" mnemonicParsing="false" onAction="#onSaveMaintenance" prefHeight="42.0" prefWidth="175.0" text="Save Record" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                         <ComboBox fx:id="maintenanceVehicle" prefHeight="40.0" prefWidth="350.0" promptText="Select Vehicle" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <DatePicker fx:id="maintenanceDate" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <TextField fx:id="maintenanceDesc" prefHeight="40.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
@@ -215,9 +222,11 @@
                     <padding>
                         <Insets right="20.0" />
                     </padding>
-                </GridPane>
-            </children>
-        </StackPane>
+                        </GridPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
     </center>
     <top>
         <Label prefHeight="82.0" prefWidth="655.0" text="Vehicle Maintenance and Usage Management System" BorderPane.alignment="CENTER">

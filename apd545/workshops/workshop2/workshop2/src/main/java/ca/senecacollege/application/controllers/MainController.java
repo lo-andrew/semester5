@@ -1,3 +1,15 @@
+/**********************************************
+ Workshop #2
+ Course: APD545 - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ Section:NBB
+ This assignment represents my own work in accordance with Seneca Academic Policy.
+ Andrew Lo
+ Date: June 6th, 2026
+ **********************************************/
+
 package ca.senecacollege.application.controllers;
 
 import ca.senecacollege.application.models.MaintenanceRecord;
@@ -12,9 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -24,11 +34,6 @@ public class MainController {
     private VehicleService vService = new VehicleService();
     private MaintenanceService mService = new MaintenanceService();
     private UsageService uService = new UsageService();
-
-    // the three forms
-    @FXML private GridPane addVehicleForm;
-    @FXML private GridPane addUsageForm;
-    @FXML private GridPane addMaintenanceForm;
 
     // addVehicle form fields
     @FXML private TextField vehicleMake;
@@ -49,34 +54,12 @@ public class MainController {
     @FXML private TextField maintenanceCost;
 
     @FXML
-    public void showAddVehicleForm(){
-        addVehicleForm.setVisible(true);
-        addUsageForm.setVisible(false);
-        addMaintenanceForm.setVisible(false);
-    }
-
-    @FXML
-    public void showAddUsageForm() {
-        addVehicleForm.setVisible(false);
-        addUsageForm.setVisible(true);
-        addMaintenanceForm.setVisible(false);
-    }
-
-    @FXML
-    public void showAddMaintenanceForm() {
-        addVehicleForm.setVisible(false);
-        addUsageForm.setVisible(false);
-        addMaintenanceForm.setVisible(true);
-    }
-
-    @FXML
     public void initialize() {
         vehicleType.getItems().addAll("Sedan", "Truck", "SUV", "Van", "Motorcycle");
-        showAddVehicleForm();
     }
 
     @FXML
-    public void addVehicle() {
+    public void onSaveVehicle() {
         String make = vehicleMake.getText();
         String model = vehicleModel.getText();
         int year = Integer.parseInt(vehicleYear.getText());
@@ -91,7 +74,7 @@ public class MainController {
     }
 
     @FXML
-    public void saveUsageRecord() {
+    public void onSaveUsage() {
         LocalDate start = usageStart.getValue();
         LocalDate end = usageEnd.getValue();
         double distance = Double.parseDouble(usageDistance.getText());
@@ -102,7 +85,7 @@ public class MainController {
     }
 
     @FXML
-    public void saveMaintenanceRecord() {
+    public void onSaveMaintenance() {
         LocalDate date = maintenanceDate.getValue();
         double cost = Double.parseDouble(maintenanceCost.getText());
         String description = maintenanceDesc.getText();
@@ -113,7 +96,7 @@ public class MainController {
     }
 
     @FXML
-    public void openSummary() {
+    public void onOpenSummary() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ca/senecacollege/application/SummaryView.fxml"));
             Parent root = loader.load();

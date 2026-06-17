@@ -1,3 +1,15 @@
+/**********************************************
+ Workshop #2
+ Course: APD545 - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ Section:NBB
+ This assignment represents my own work in accordance with Seneca Academic Policy.
+ Andrew Lo
+ Date: June 6th, 2026
+ **********************************************/
+
 package ca.senecacollege.application.controllers;
 
 import ca.senecacollege.application.models.MaintenanceRecord;
@@ -34,10 +46,10 @@ public class SummaryController {
         this.vService = v;
         this.mService = m;
         this.uService = u;
-        setServices();
+        initializeControls();
     }
 
-    public void setServices() {
+    public void initializeControls() {
         dataTypeCombo.getItems().addAll("Vehicles", "Usage Logs", "Maintenance Records");
         dataTypeCombo.setOnAction(e -> updateTable());
     }
