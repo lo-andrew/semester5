@@ -22,7 +22,6 @@
 
         <!-- Toolbar -->
         <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 10 16 10 16; -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0;">
-            <Label fx:id="lblWelcome" style="-fx-font-weight: bold; -fx-text-fill: black;" text="Welcome" />
             <Button fx:id="btnNavCustomer" onAction="#scrollToCustomer" text="Customer" />
             <Button fx:id="btnNavVehicle" onAction="#scrollToVehicle" text="Vehicle" />
             <Button fx:id="btnNavLoan" onAction="#scrollToLoan" text="Loan" />
@@ -51,7 +50,7 @@
 
                         <VBox spacing="4" GridPane.columnIndex="1" GridPane.rowIndex="0">
                             <Label style="-fx-text-fill: black;" text="Phone Number" />
-                            <TextField fx:id="txtPhone" promptText="(416) 555-0000" />
+                            <TextField fx:id="txtPhone" promptText="123-456-7890" />
                             <Label fx:id="lblPhoneError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
                         </VBox>
 
@@ -81,11 +80,11 @@
                         <VBox spacing="6">
                             <Label style="-fx-text-fill: black;" text="Vehicle Type" />
                             <HBox spacing="12">
-                                <RadioButton fx:id="rbCar" selected="true" text="Car" style="-fx-text-fill: black;">
+                                <RadioButton fx:id="rbCar" selected="true" style="-fx-text-fill: black;" text="Car">
                                     <toggleGroup><ToggleGroup fx:id="tgVehicleType" /></toggleGroup>
                                 </RadioButton>
-                                <RadioButton fx:id="rbTruck" text="Truck" toggleGroup="$tgVehicleType" style="-fx-text-fill: black;" />
-                                <RadioButton fx:id="rbVan" text="Family Van" toggleGroup="$tgVehicleType" style="-fx-text-fill: black;"/>
+                                <RadioButton fx:id="rbTruck" style="-fx-text-fill: black;" text="Truck" toggleGroup="$tgVehicleType" />
+                                <RadioButton fx:id="rbVan" style="-fx-text-fill: black;" text="Family Van" toggleGroup="$tgVehicleType" />
                             </HBox>
                             <Label fx:id="lblVehicleTypeError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
                         </VBox>
@@ -93,16 +92,16 @@
                         <VBox spacing="6">
                             <Label style="-fx-text-fill: black;" text="Vehicle Age" />
                             <HBox spacing="12">
-                                <RadioButton fx:id="rbNew" selected="true" text="New" style="-fx-text-fill: black;">
+                                <RadioButton fx:id="rbNew" selected="true" style="-fx-text-fill: black;" text="New">
                                     <toggleGroup><ToggleGroup fx:id="tgVehicleAge" /></toggleGroup>
                                 </RadioButton>
-                                <RadioButton fx:id="rbUsed" text="Used" toggleGroup="$tgVehicleAge" style="-fx-text-fill: black;"/>
+                                <RadioButton fx:id="rbUsed" style="-fx-text-fill: black;" text="Used" toggleGroup="$tgVehicleAge" />
                             </HBox>
                         </VBox>
 
                         <VBox spacing="4">
                             <Label style="-fx-text-fill: black;" text="Vehicle Price" />
-                            <TextField fx:id="txtVehiclePrice" prefWidth="200" promptText="e.g. 32500.00" />
+                            <TextField fx:id="txtVehiclePrice" prefWidth="200" promptText="999.99" />
                             <Label fx:id="lblPriceError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
                         </VBox>
                     </VBox>
@@ -121,19 +120,19 @@
 
                             <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                 <Label style="-fx-text-fill: black;" text="Down Payment" />
-                                <TextField fx:id="txtDownPayment" promptText="e.g. 5000.00" />
+                                <TextField fx:id="txtDownPayment" promptText="9999.99" />
                                 <Label fx:id="lblDownPaymentError" style="-fx-text-fill: red; -fx-font-size: 11px;" text="" />
                             </VBox>
 
                             <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                 <Label style="-fx-text-fill: black;" text="Interest Rate" />
                                 <HBox spacing="12">
-                                    <RadioButton fx:id="rb099" text="0.99%" style="-fx-text-fill: black;">
+                                    <RadioButton fx:id="rb099" style="-fx-text-fill: black;" text="0.99%">
                                         <toggleGroup><ToggleGroup fx:id="tgInterestRate" /></toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="rb199" selected="true" text="1.99%" toggleGroup="$tgInterestRate" style="-fx-text-fill: black;"/>
-                                    <RadioButton fx:id="rb299" text="2.99%" toggleGroup="$tgInterestRate" style="-fx-text-fill: black;"/>
-                                    <RadioButton fx:id="rbOther" text="Other" toggleGroup="$tgInterestRate" style="-fx-text-fill: black;"/>
+                                    <RadioButton fx:id="rb199" selected="true" style="-fx-text-fill: black;" text="1.99%" toggleGroup="$tgInterestRate" />
+                                    <RadioButton fx:id="rb299" style="-fx-text-fill: black;" text="2.99%" toggleGroup="$tgInterestRate" />
+                                    <RadioButton fx:id="rbOther" style="-fx-text-fill: black;" text="Other" toggleGroup="$tgInterestRate" />
                                 </HBox>
                                 <TextField fx:id="txtCustomRate" managed="false" prefWidth="120" promptText="Enter rate %" visible="false" />
                             </VBox>
@@ -144,13 +143,13 @@
 
                         <!-- Duration -->
                         <VBox spacing="6">
-                            <HBox alignment="CENTER_LEFT" spacing="8">
+                            <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-text-fill: black;">
                                 <Label style="-fx-text-fill: black;" text="Loan Duration:" />
                                 <Label fx:id="lblDurationValue" style="-fx-font-weight: bold; -fx-text-fill: black;" text="60 months" />
                             </HBox>
-                            <HBox alignment="CENTER_LEFT" spacing="10">
+                            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-text-fill: black;">
                                 <Label style="-fx-text-fill: black;" text="12" />
-                                <Slider fx:id="sliderDuration" blockIncrement="1" max="96" min="12" onMouseClicked="#handleDurationChange" onMouseDragged="#handleDurationChange" value="60" HBox.hgrow="ALWAYS" />
+                                <Slider fx:id="sliderDuration" blockIncrement="1" majorTickUnit="12.0" max="96" min="12" minorTickCount="6" onMouseClicked="#handleDurationChange" onMouseDragged="#handleDurationChange" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="60" HBox.hgrow="ALWAYS" />
                                 <Label style="-fx-text-fill: black;" text="96" />
                             </HBox>
                         </VBox>
@@ -159,11 +158,11 @@
                         <VBox spacing="6">
                             <Label style="-fx-text-fill: black;" text="Payment Frequency" />
                             <HBox spacing="12">
-                                <RadioButton fx:id="rbWeekly" text="Weekly" style="-fx-text-fill: black;">
+                                <RadioButton fx:id="rbWeekly" style="-fx-text-fill: black;" text="Weekly">
                                     <toggleGroup><ToggleGroup fx:id="tgFrequency" /></toggleGroup>
                                 </RadioButton>
-                                <RadioButton fx:id="rbBiweekly" selected="true" text="Bi-weekly" toggleGroup="$tgFrequency" style="-fx-text-fill: black;" />
-                                <RadioButton fx:id="rbMonthly" text="Monthly" toggleGroup="$tgFrequency"  style="-fx-text-fill: black;"/>
+                                <RadioButton fx:id="rbBiweekly" selected="true" style="-fx-text-fill: black;" text="Bi-weekly" toggleGroup="$tgFrequency" />
+                                <RadioButton fx:id="rbMonthly" style="-fx-text-fill: black;" text="Monthly" toggleGroup="$tgFrequency" />
                             </HBox>
                         </VBox>
 

@@ -8,10 +8,9 @@
 
 <AnchorPane prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomepageController">
 
-    <VBox alignment="CENTER_LEFT" spacing="16" style="-fx-padding: 48; -fx-text-fill: black;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+    <VBox alignment="CENTER" prefHeight="900.0" prefWidth="1200.0" spacing="16" style="-fx-padding: 48; -fx-text-fill: black;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
         <Label style="-fx-font-size: 26px; -fx-font-weight: bold;" text="AutoLoan" />
-        <Label style="-fx-font-size: 13px;" text="See every payment broken down by principal and interest." />
 
         <HBox spacing="12">
             <Button fx:id="btnSignup" onAction="#handleSignup" text="Get Started" />
