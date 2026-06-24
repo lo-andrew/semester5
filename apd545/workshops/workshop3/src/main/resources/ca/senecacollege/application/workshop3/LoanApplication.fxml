@@ -20,15 +20,7 @@
 
     <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
-        <!-- Toolbar -->
-        <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 10 16 10 16; -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0;">
-            <Button fx:id="btnNavCustomer" text="Customer" />
-            <Button fx:id="btnNavVehicle" text="Vehicle" />
-            <Button fx:id="btnNavLoan" text="Loan" />
-            <Button fx:id="btnNavSaved" text="Saved Rates" />
-        </HBox>
-
-        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
 
             <VBox spacing="20" style="-fx-padding: 20;">
 
@@ -148,9 +140,7 @@
                                 <Label fx:id="lblDurationValue" style="-fx-font-weight: bold; -fx-text-fill: black;" text="60 months" />
                             </HBox>
                             <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-text-fill: black;">
-                                <Label style="-fx-text-fill: black;" text="12" />
-                                <Slider fx:id="sliderDuration" blockIncrement="1" majorTickUnit="12.0" max="96" min="12" minorTickCount="6" onMouseClicked="#handleDurationChange" onMouseDragged="#handleDurationChange" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="60" HBox.hgrow="ALWAYS" />
-                                <Label style="-fx-text-fill: black;" text="96" />
+                                <Slider fx:id="sliderDuration" blockIncrement="6.0" majorTickUnit="12.0" max="96" min="12" minorTickCount="6" onMouseClicked="#handleDurationChange" onMouseDragged="#handleDurationChange" showTickLabels="true" showTickMarks="true" snapToTicks="true" style="-fx-tick-label-fill: black;" value="60" HBox.hgrow="ALWAYS" />
                             </HBox>
                         </VBox>
 

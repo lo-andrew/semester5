@@ -1,6 +1,7 @@
 package ca.senecacollege.application.workshop3.controllers;
 
 import ca.senecacollege.application.workshop3.enums.PaymentFrequency;
+import ca.senecacollege.application.workshop3.enums.VehicleAge;
 import ca.senecacollege.application.workshop3.models.FixedRateLoan;
 import ca.senecacollege.application.workshop3.models.Loan;
 import ca.senecacollege.application.workshop3.repository.LoanRepository;
@@ -113,6 +114,20 @@ public class LoanController {
         rbOther.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
             txtCustomRate.setVisible(isSelected);
             txtCustomRate.setManaged(isSelected);
+        });
+
+        listSavedRates.getSelectionModel().selectedIndexProperty().addListener((obs, oldIndex, newIndex) -> {
+            int index = newIndex.intValue();
+            if (index < 0) return;
+            Loan saved = loanRepository.getAllLoans().get(index);
+            loadSavedLoan(saved);
+        });
+
+        sliderDuration.skinProperty().addListener((obs, oldSkin, newSkin) -> {
+            if (newSkin != null) {
+                sliderDuration.lookupAll(".tick-label").forEach(node ->
+                        node.setStyle("-fx-fill: black;"));
+            }
         });
     }
 
@@ -259,5 +274,49 @@ public class LoanController {
 
         Stage stage = (Stage) btnViewAmortization.getScene().getWindow();
         stage.setScene(new Scene(root));
+    }
+
+    private void loadSavedLoan(Loan loan) {
+        // customer
+        txtName.setText(loan.getCustomer().getName());
+        txtPhone.setText(loan.getCustomer().getPhone());
+        txtCity.setText(loan.getCustomer().getCity());
+        cmbProvince.setValue(loan.getCustomer().getProvince());
+
+        // vehicle
+        switch (loan.getVehicle().getType()) {
+            case CAR   -> rbCar.setSelected(true);
+            case TRUCK -> rbTruck.setSelected(true);
+            case FAMILY_VAN   -> rbVan.setSelected(true);
+        }
+        if (loan.getVehicle().getAge() == VehicleAge.NEW) rbNew.setSelected(true);
+        else rbUsed.setSelected(true);
+        txtVehiclePrice.setText(String.valueOf(loan.getVehicle().getPrice()));
+
+        // Loan
+        txtDownPayment.setText(String.valueOf(loan.getDownPayment()));
+
+        double rate = loan.getInterestRate();
+        if      (rate == 0.99) rb099.setSelected(true);
+        else if (rate == 1.99) rb199.setSelected(true);
+        else if (rate == 2.99) rb299.setSelected(true);
+        else {
+            rbOther.setSelected(true);
+            txtCustomRate.setText(String.valueOf(rate));
+        }
+
+        sliderDuration.setValue(loan.getDuration());
+        lblDurationValue.setText(loan.getDuration() + " months");
+
+        switch (loan.getFrequency()) {
+            case WEEKLY   -> rbWeekly.setSelected(true);
+            case BIWEEKLY -> rbBiweekly.setSelected(true);
+            case MONTHLY  -> rbMonthly.setSelected(true);
+        }
+
+        lastCalculatedLoan = loan;
+        double payment = loanCalculator.calculatePayment(loan);
+        lblEstimatedPayment.setText(String.format("$%.2f", payment));
+        listSavedRates.getSelectionModel().clearSelection();
     }
 }
