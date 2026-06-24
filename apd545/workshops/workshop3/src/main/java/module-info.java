@@ -7,4 +7,5 @@ module ca.senecacollege.application.workshop3 {
 
     opens ca.senecacollege.application.workshop3 to javafx.fxml, javafx.graphics;
     opens ca.senecacollege.application.workshop3.controllers to javafx.fxml;
+    opens ca.senecacollege.application.workshop3.models to javafx.base;
 }

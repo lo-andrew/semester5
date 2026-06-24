@@ -4,13 +4,15 @@ import ca.senecacollege.application.workshop3.enums.PaymentFrequency;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public class Loan {
 
-    private DoubleProperty downPayment;
-    private DoubleProperty interestRate;
-    private IntegerProperty duration;
+    private DoubleProperty  downPayment  = new SimpleDoubleProperty();
+    private DoubleProperty  interestRate = new SimpleDoubleProperty();
+    private IntegerProperty duration     = new SimpleIntegerProperty();
     private ObjectProperty<PaymentFrequency> frequency = new SimpleObjectProperty<>();
     private ObjectProperty<Customer> customer          = new SimpleObjectProperty<>();
     private ObjectProperty<Vehicle> vehicle           = new SimpleObjectProperty<>();

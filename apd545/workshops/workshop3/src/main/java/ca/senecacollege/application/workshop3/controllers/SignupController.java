@@ -1,6 +1,7 @@
 package ca.senecacollege.application.workshop3.controllers;
 
 import ca.senecacollege.application.workshop3.models.User;
+import ca.senecacollege.application.workshop3.repository.LoanRepository;
 import ca.senecacollege.application.workshop3.repository.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +30,15 @@ public class SignupController {
     @FXML private Hyperlink     linkLogin;
 
     private UserRepository userRepo;
+    private LoanRepository loanRepo;
+
+    public void setUserRepository(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
+
+    public void setLoanRepository(LoanRepository loanRepo) {
+        this.loanRepo = loanRepo;
+    }
 
     @FXML
     private void handleSignup(ActionEvent event) throws IOException{
@@ -37,7 +47,6 @@ public class SignupController {
         String confirm  = txtConfirmPassword.getText();
         String email    = txtEmail.getText().trim();
 
-        // Basic validation
         if (!password.equals(confirm)) {
             lblConfirmError.setText("Passwords do not match.");
             return;
@@ -51,9 +60,12 @@ public class SignupController {
         User user = new User(username, password, email);
         userRepo.addUser(user);
 
-        // Navigate to login
+        // go to login page after signing up
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ca/senecacollege/application/workshop3/Login.fxml"));
         Parent root = loader.load();
+        LoginController loginController = loader.getController();
+        loginController.setUserRepository(userRepo);
+        loginController.setLoanRepository(loanRepo);
         Stage stage = (Stage) btnCreateAccount.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
@@ -62,7 +74,9 @@ public class SignupController {
     private void handleGoToLogin(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ca/senecacollege/application/workshop3/Login.fxml"));
         Parent root = loader.load();
-
+        LoginController loginController = loader.getController();
+        loginController.setUserRepository(userRepo);
+        loginController.setLoanRepository(loanRepo);
         Stage stage = (Stage) linkLogin.getScene().getWindow();
         stage.setScene(new Scene(root));
     }

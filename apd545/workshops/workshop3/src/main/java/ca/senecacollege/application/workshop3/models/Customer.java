@@ -1,12 +1,13 @@
 package ca.senecacollege.application.workshop3.models;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Customer {
-    private StringProperty name;
-    private StringProperty phone;
-    private StringProperty city;
-    private StringProperty province;
+    private StringProperty name     = new SimpleStringProperty();
+    private StringProperty phone    = new SimpleStringProperty();
+    private StringProperty city     = new SimpleStringProperty();
+    private StringProperty province = new SimpleStringProperty();
 
     public String getName() {
         return name.get();

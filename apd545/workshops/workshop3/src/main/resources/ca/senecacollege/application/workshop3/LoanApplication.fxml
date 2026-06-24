@@ -16,16 +16,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1115.0" prefWidth="1200" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="1115.0" prefWidth="1200" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.workshop3.controllers.LoanController">
 
     <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
         <!-- Toolbar -->
         <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 10 16 10 16; -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0;">
-            <Button fx:id="btnNavCustomer" onAction="#scrollToCustomer" text="Customer" />
-            <Button fx:id="btnNavVehicle" onAction="#scrollToVehicle" text="Vehicle" />
-            <Button fx:id="btnNavLoan" onAction="#scrollToLoan" text="Loan" />
-            <Button fx:id="btnNavSaved" onAction="#scrollToSaved" text="Saved Rates" />
+            <Button fx:id="btnNavCustomer" text="Customer" />
+            <Button fx:id="btnNavVehicle" text="Vehicle" />
+            <Button fx:id="btnNavLoan" text="Loan" />
+            <Button fx:id="btnNavSaved" text="Saved Rates" />
         </HBox>
 
         <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
