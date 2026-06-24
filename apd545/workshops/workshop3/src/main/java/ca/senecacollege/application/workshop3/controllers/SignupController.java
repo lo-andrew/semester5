@@ -1,0 +1,69 @@
+package ca.senecacollege.application.workshop3.controllers;
+
+import ca.senecacollege.application.workshop3.models.User;
+import ca.senecacollege.application.workshop3.repository.UserRepository;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class SignupController {
+
+    @FXML private TextField     txtUsername;
+    @FXML private TextField     txtEmail;
+    @FXML private PasswordField txtPassword;
+    @FXML private PasswordField txtConfirmPassword;
+    @FXML private Label         lblPasswordError;
+    @FXML private Label         lblConfirmError;
+    @FXML private Label         lblGeneralError;
+    @FXML private Button        btnCreateAccount;
+    @FXML private Hyperlink     linkLogin;
+
+    private UserRepository userRepo;
+
+    @FXML
+    private void handleSignup(ActionEvent event) throws IOException{
+        String username = txtUsername.getText().trim();
+        String password = txtPassword.getText();
+        String confirm  = txtConfirmPassword.getText();
+        String email    = txtEmail.getText().trim();
+
+        // Basic validation
+        if (!password.equals(confirm)) {
+            lblConfirmError.setText("Passwords do not match.");
+            return;
+        }
+
+        if (username.isEmpty() || email.isEmpty()) {
+            lblGeneralError.setText("All fields are required.");
+            return;
+        }
+
+        User user = new User(username, password, email);
+        userRepo.addUser(user);
+
+        // Navigate to login
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ca/senecacollege/application/workshop3/Login.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) btnCreateAccount.getScene().getWindow();
+        stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    private void handleGoToLogin(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ca/senecacollege/application/workshop3/Login.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) linkLogin.getScene().getWindow();
+        stage.setScene(new Scene(root));
+    }
+}
