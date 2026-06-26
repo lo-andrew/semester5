@@ -1,3 +1,14 @@
+/**********************************************
+ Workshop # 3
+ Course:APD545 - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ Section: NBB
+ This assignment represents my own work in accordance with Seneca Academic Policy.
+ Signature
+ Date: June 26th, 2026
+ **********************************************/
 package ca.senecacollege.application.workshop3;
 
 import ca.senecacollege.application.workshop3.controllers.HomepageController;
@@ -14,6 +25,7 @@ import java.io.IOException;
 public class AutoLoanApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        // create repositories at higher level
         UserRepository userRepository = new UserRepository();
         LoanRepository loanRepository = new LoanRepository();
 

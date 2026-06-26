@@ -1,3 +1,14 @@
+/**********************************************
+ Workshop # 3
+ Course:APD545 - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ Section: NBB
+ This assignment represents my own work in accordance with Seneca Academic Policy.
+ Signature
+ Date: June 26th, 2026
+ **********************************************/
 package ca.senecacollege.application.workshop3.controllers;
 
 import ca.senecacollege.application.workshop3.enums.PaymentFrequency;
@@ -19,81 +30,69 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class LoanController {
 
-    // nav
-    @FXML private Button btnNavCustomer;
-    @FXML private Button btnNavVehicle;
-    @FXML private Button btnNavLoan;
-    @FXML private Button btnNavSaved;
-
-    // sections
-    @FXML private VBox sectionCustomer;
-    @FXML private VBox sectionVehicle;
-    @FXML private VBox sectionLoan;
-    @FXML private VBox sectionSaved;
-
     // customer
-    @FXML private TextField       txtName;
-    @FXML private TextField       txtPhone;
-    @FXML private TextField       txtCity;
+    @FXML private TextField txtName;
+    @FXML private TextField txtPhone;
+    @FXML private TextField txtCity;
     @FXML private ComboBox<String> cmbProvince;
-    @FXML private Label           lblNameError;
-    @FXML private Label           lblPhoneError;
-    @FXML private Label           lblCityError;
-    @FXML private Label           lblProvinceError;
+    @FXML private Label lblNameError;
+    @FXML private Label lblPhoneError;
+    @FXML private Label lblCityError;
+    @FXML private Label lblProvinceError;
 
     // vehicle
-    @FXML private RadioButton  rbCar;
-    @FXML private RadioButton  rbTruck;
-    @FXML private RadioButton  rbVan;
-    @FXML private ToggleGroup  tgVehicleType;
-    @FXML private Label        lblVehicleTypeError;
-    @FXML private RadioButton  rbNew;
-    @FXML private RadioButton  rbUsed;
-    @FXML private ToggleGroup  tgVehicleAge;
-    @FXML private TextField    txtVehiclePrice;
-    @FXML private Label        lblPriceError;
+    @FXML private RadioButton rbCar;
+    @FXML private RadioButton rbTruck;
+    @FXML private RadioButton rbVan;
+    @FXML private ToggleGroup tgVehicleType;
+    @FXML private Label lblVehicleTypeError;
+    @FXML private RadioButton rbNew;
+    @FXML private RadioButton rbUsed;
+    @FXML private ToggleGroup tgVehicleAge;
+    @FXML private TextField txtVehiclePrice;
+    @FXML private Label lblPriceError;
 
     // loan
-    @FXML private TextField    txtDownPayment;
-    @FXML private Label        lblDownPaymentError;
-    @FXML private RadioButton  rb099;
-    @FXML private RadioButton  rb199;
-    @FXML private RadioButton  rb299;
-    @FXML private RadioButton  rbOther;
-    @FXML private ToggleGroup  tgInterestRate;
-    @FXML private TextField    txtCustomRate;
-    @FXML private Slider       sliderDuration;
-    @FXML private Label        lblDurationValue;
-    @FXML private RadioButton  rbWeekly;
-    @FXML private RadioButton  rbBiweekly;
-    @FXML private RadioButton  rbMonthly;
-    @FXML private ToggleGroup  tgFrequency;
-    @FXML private Label        lblFrequencyDesc;
-    @FXML private Label        lblEstimatedPayment;
-    @FXML private Button       btnClear;
-    @FXML private Button       btnCalculate;
-    @FXML private Button       btnSaveRate;
-    @FXML private Button       btnViewAmortization;
+    @FXML private TextField txtDownPayment;
+    @FXML private Label lblDownPaymentError;
+    @FXML private RadioButton rb099;
+    @FXML private RadioButton rb199;
+    @FXML private RadioButton rb299;
+    @FXML private RadioButton rbOther;
+    @FXML private ToggleGroup tgInterestRate;
+    @FXML private TextField  txtCustomRate;
+    @FXML private Slider sliderDuration;
+    @FXML private Label lblDurationValue;
+    @FXML private RadioButton rbWeekly;
+    @FXML private RadioButton rbBiweekly;
+    @FXML private RadioButton rbMonthly;
+    @FXML private ToggleGroup tgFrequency;
+    @FXML private Label lblFrequencyDesc;
+    @FXML private Label lblEstimatedPayment;
+    @FXML private Button btnClear;
+    @FXML private Button btnCalculate;
+    @FXML private Button btnSaveRate;
+    @FXML private Button btnViewAmortization;
 
     // saved rates
     @FXML private ListView<String> listSavedRates;
 
     // sub-controllers
     private CustomerController customerController = new CustomerController();
-    private VehicleController  vehicleController  = new VehicleController();
+    private VehicleController vehicleController  = new VehicleController();
 
     // dependencies
-    private LoanRepository  loanRepository;
-    private FixedRateLoan   loanCalculator = new FixedRateLoan();
-    private Loan            lastCalculatedLoan;
+    private LoanRepository loanRepository;
+    private FixedRateLoan loanCalculator = new FixedRateLoan();
+    private Loan lastCalculatedLoan;
 
+    // manually direct inject loan repo
     public void setLoanRepository(LoanRepository loanRepository) {
         this.loanRepository = loanRepository;
     }
@@ -293,7 +292,7 @@ public class LoanController {
         else rbUsed.setSelected(true);
         txtVehiclePrice.setText(String.valueOf(loan.getVehicle().getPrice()));
 
-        // Loan
+        // loan
         txtDownPayment.setText(String.valueOf(loan.getDownPayment()));
 
         double rate = loan.getInterestRate();

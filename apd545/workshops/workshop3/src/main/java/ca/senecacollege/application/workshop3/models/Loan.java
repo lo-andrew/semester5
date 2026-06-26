@@ -1,3 +1,14 @@
+/**********************************************
+ Workshop # 3
+ Course:APD545 - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ Section: NBB
+ This assignment represents my own work in accordance with Seneca Academic Policy.
+ Signature
+ Date: June 26th, 2026
+ **********************************************/
 package ca.senecacollege.application.workshop3.models;
 
 import ca.senecacollege.application.workshop3.enums.PaymentFrequency;
@@ -10,12 +21,12 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public class Loan {
 
-    private DoubleProperty  downPayment  = new SimpleDoubleProperty();
-    private DoubleProperty  interestRate = new SimpleDoubleProperty();
-    private IntegerProperty duration     = new SimpleIntegerProperty();
+    private DoubleProperty downPayment = new SimpleDoubleProperty();
+    private DoubleProperty interestRate = new SimpleDoubleProperty();
+    private IntegerProperty duration = new SimpleIntegerProperty();
     private ObjectProperty<PaymentFrequency> frequency = new SimpleObjectProperty<>();
-    private ObjectProperty<Customer> customer          = new SimpleObjectProperty<>();
-    private ObjectProperty<Vehicle> vehicle           = new SimpleObjectProperty<>();
+    private ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
+    private ObjectProperty<Vehicle> vehicle = new SimpleObjectProperty<>();
 
     public double getDownPayment() {
         return downPayment.get();

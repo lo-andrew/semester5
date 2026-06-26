@@ -13,7 +13,7 @@ public class AmortizationService {
     public List<AmortizationEntry> generateSchedule(Loan loan) {
         double principal    = loan.getVehicle().getPrice() - loan.getDownPayment();
         double annualRate   = loan.getInterestRate() / 100.0;
-        int    durationMonths = loan.getDuration();
+        int durationMonths = loan.getDuration();
 
         int paymentsPerYear = switch (loan.getFrequency()) {
             case WEEKLY    -> 52;
@@ -22,7 +22,7 @@ public class AmortizationService {
         };
 
         double periodicRate  = annualRate / paymentsPerYear;
-        int    totalPayments = (int) Math.round(durationMonths * paymentsPerYear / 12.0);
+        int totalPayments = (int) Math.round(durationMonths * paymentsPerYear / 12.0);
 
         double payment = (periodicRate == 0)
             ? principal / totalPayments
@@ -30,8 +30,8 @@ public class AmortizationService {
               / (Math.pow(1 + periodicRate, totalPayments) - 1);
 
         List<AmortizationEntry> schedule = new ArrayList<>();
-        double    balance = principal;
-        LocalDate date    = LocalDate.now();
+        double balance = principal;
+        LocalDate date = LocalDate.now();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
         for (int i = 1; i <= totalPayments; i++) {

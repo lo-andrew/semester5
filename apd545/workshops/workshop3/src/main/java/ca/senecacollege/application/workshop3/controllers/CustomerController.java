@@ -1,3 +1,15 @@
+/**********************************************
+ Workshop # 3
+ Course:APD545 - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ Section: NBB
+ This assignment represents my own work in accordance with Seneca Academic Policy.
+ Signature
+ Date: June 26th, 2026
+ **********************************************/
+
 package ca.senecacollege.application.workshop3.controllers;
 
 import ca.senecacollege.application.workshop3.models.Customer;
@@ -7,25 +19,25 @@ import javafx.scene.control.TextField;
 
 public class CustomerController {
 
-    private TextField       txtName;
-    private TextField       txtPhone;
-    private TextField       txtCity;
+    private TextField txtName;
+    private TextField txtPhone;
+    private TextField txtCity;
     private ComboBox<String> cmbProvince;
-    private Label           lblNameError;
-    private Label           lblPhoneError;
-    private Label           lblCityError;
-    private Label           lblProvinceError;
+    private Label lblNameError;
+    private Label lblPhoneError;
+    private Label lblCityError;
+    private Label lblProvinceError;
 
     public void setFields(TextField txtName, TextField txtPhone, TextField txtCity,
                           ComboBox<String> cmbProvince, Label lblNameError,
                           Label lblPhoneError, Label lblCityError, Label lblProvinceError) {
-        this.txtName         = txtName;
-        this.txtPhone        = txtPhone;
-        this.txtCity         = txtCity;
-        this.cmbProvince     = cmbProvince;
-        this.lblNameError    = lblNameError;
-        this.lblPhoneError   = lblPhoneError;
-        this.lblCityError    = lblCityError;
+        this.txtName = txtName;
+        this.txtPhone = txtPhone;
+        this.txtCity = txtCity;
+        this.cmbProvince = cmbProvince;
+        this.lblNameError = lblNameError;
+        this.lblPhoneError = lblPhoneError;
+        this.lblCityError = lblCityError;
         this.lblProvinceError = lblProvinceError;
 
         cmbProvince.getItems().addAll(

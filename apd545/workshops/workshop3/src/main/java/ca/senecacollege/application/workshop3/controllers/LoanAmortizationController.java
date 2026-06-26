@@ -1,3 +1,14 @@
+/**********************************************
+ Workshop # 3
+ Course:APD545 - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ Section: NBB
+ This assignment represents my own work in accordance with Seneca Academic Policy.
+ Signature
+ Date: June 26th, 2026
+ **********************************************/
 package ca.senecacollege.application.workshop3.controllers;
 
 import ca.senecacollege.application.workshop3.models.AmortizationEntry;
@@ -18,28 +29,31 @@ import java.util.List;
 
 public class LoanAmortizationController {
 
-    @FXML private Button    btnBack;
+    @FXML private Button btnBack;
 
-    @FXML private Label     lblVehiclePrice;
-    @FXML private Label     lblDownPayment;
-    @FXML private Label     lblTotalInterest;
-    @FXML private Label     lblTotalCost;
+    @FXML private Label lblVehiclePrice;
+    @FXML private Label lblDownPayment;
+    @FXML private Label lblTotalInterest;
+    @FXML private Label lblTotalCost;
 
-    @FXML private TableView<AmortizationEntry>      tableAmortization;
-    @FXML private TableColumn<AmortizationEntry, String>  colDate;
+    @FXML private TableView<AmortizationEntry> tableAmortization;
+    @FXML private TableColumn<AmortizationEntry, String> colDate;
     @FXML private TableColumn<AmortizationEntry, Integer> colMonth;
-    @FXML private TableColumn<AmortizationEntry, Double>  colPayment;
-    @FXML private TableColumn<AmortizationEntry, Double>  colPrincipal;
-    @FXML private TableColumn<AmortizationEntry, Double>  colInterest;
-    @FXML private TableColumn<AmortizationEntry, Double>  colBalance;
+    @FXML private TableColumn<AmortizationEntry, Double> colPayment;
+    @FXML private TableColumn<AmortizationEntry, Double> colPrincipal;
+    @FXML private TableColumn<AmortizationEntry, Double> colInterest;
+    @FXML private TableColumn<AmortizationEntry, Double> colBalance;
 
     private Scene previousScene;
     private final AmortizationService amortizationService = new AmortizationService();
 
+    // direct inject
     public void setPreviousScene(Scene scene) {
+        // work in the scene we are in
         this.previousScene = scene;
     }
 
+    // inject loan
     public void setLoan(Loan loan) {
         // summary labels
         lblVehiclePrice.setText(String.format("$%.2f", loan.getVehicle().getPrice()));
@@ -54,7 +68,7 @@ public class LoanAmortizationController {
         lblTotalInterest.setText(String.format("$%.2f", totalInterest));
         lblTotalCost.setText(String.format("$%.2f", totalCost));
 
-        // wire table columns
+        // put in table columns
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colMonth.setCellValueFactory(new PropertyValueFactory<>("month"));
         colPayment.setCellValueFactory(new PropertyValueFactory<>("payment"));

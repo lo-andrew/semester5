@@ -1,3 +1,14 @@
+/**********************************************
+ Workshop # 3
+ Course:APD545 - Semester 5
+ Last Name: Lo
+ First Name: Andrew
+ ID: 162539217
+ Section: NBB
+ This assignment represents my own work in accordance with Seneca Academic Policy.
+ Signature
+ Date: June 26th, 2026
+ **********************************************/
 package ca.senecacollege.application.workshop3.controllers;
 
 import ca.senecacollege.application.workshop3.enums.VehicleAge;
@@ -10,31 +21,31 @@ import javafx.scene.control.ToggleGroup;
 
 public class VehicleController {
 
-    private RadioButton  rbCar;
-    private RadioButton  rbTruck;
-    private RadioButton  rbVan;
-    private ToggleGroup  tgVehicleType;
-    private Label        lblVehicleTypeError;
-    private RadioButton  rbNew;
-    private RadioButton  rbUsed;
-    private ToggleGroup  tgVehicleAge;
-    private TextField    txtVehiclePrice;
-    private Label        lblPriceError;
+    private RadioButton rbCar;
+    private RadioButton rbTruck;
+    private RadioButton rbVan;
+    private ToggleGroup tgVehicleType;
+    private Label lblVehicleTypeError;
+    private RadioButton rbNew;
+    private RadioButton rbUsed;
+    private ToggleGroup tgVehicleAge;
+    private TextField txtVehiclePrice;
+    private Label lblPriceError;
 
     public void setFields(RadioButton rbCar, RadioButton rbTruck, RadioButton rbVan,
                           ToggleGroup tgVehicleType, Label lblVehicleTypeError,
                           RadioButton rbNew, RadioButton rbUsed, ToggleGroup tgVehicleAge,
                           TextField txtVehiclePrice, Label lblPriceError) {
-        this.rbCar              = rbCar;
-        this.rbTruck            = rbTruck;
-        this.rbVan              = rbVan;
-        this.tgVehicleType      = tgVehicleType;
+        this.rbCar = rbCar;
+        this.rbTruck = rbTruck;
+        this.rbVan = rbVan;
+        this.tgVehicleType = tgVehicleType;
         this.lblVehicleTypeError = lblVehicleTypeError;
-        this.rbNew              = rbNew;
-        this.rbUsed             = rbUsed;
-        this.tgVehicleAge       = tgVehicleAge;
-        this.txtVehiclePrice    = txtVehiclePrice;
-        this.lblPriceError      = lblPriceError;
+        this.rbNew = rbNew;
+        this.rbUsed = rbUsed;
+        this.tgVehicleAge = tgVehicleAge;
+        this.txtVehiclePrice = txtVehiclePrice;
+        this.lblPriceError = lblPriceError;
     }
 
     public boolean validateVehicle() {
@@ -71,9 +82,13 @@ public class VehicleController {
     public Vehicle getVehicle() {
         Vehicle vehicle = new Vehicle();
 
-        if (rbCar.isSelected())        vehicle.setType(VehicleType.CAR);
-        else if (rbTruck.isSelected()) vehicle.setType(VehicleType.TRUCK);
-        else if (rbVan.isSelected())   vehicle.setType(VehicleType.FAMILY_VAN);
+        if (rbCar.isSelected()) {
+            vehicle.setType(VehicleType.CAR);
+        } else if (rbTruck.isSelected()) {
+            vehicle.setType(VehicleType.TRUCK);
+        } else if (rbVan.isSelected()) {
+            vehicle.setType(VehicleType.FAMILY_VAN);
+        }
 
         vehicle.setAge(rbNew.isSelected() ? VehicleAge.NEW : VehicleAge.USED);
         vehicle.setPrice(Double.parseDouble(txtVehiclePrice.getText().trim()));
