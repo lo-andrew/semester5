@@ -1,0 +1,44 @@
+Workshop 3
+APD545 NBB
+Andrew Lo
+162539217
+
+Reflection
+
+What challenges did you encounter when implementing Manual DI, MVC, and Repository Pattern?
+
+When implementing Manual DI, I wasn't initially sure where or how to inject, and at first I had a constructor
+to handle the injection, but I fell back on creating a separate method to set the repositories when injecting
+them. For the MVC pattern, I was initially confused on the implementation of the controllers for the different
+sections of my form used to calculate the loan and amortization. After some research, I found the best way was to 
+create an initialize method that would invoke a setFields method to give references to the FXML controls to
+the corresponding controllers. For the repository patterns, I didn't have issues really, it was straightforward
+to create a repository for the loans and users
+
+How did you ensurethe amortization schedule displayed accurate and formatted data?
+
+The setup for the amortization schedule was a bit difficult. I had to first ensure that the columns were correct
+and also ensure that the columns that had money displayed were formatted correctly, where I used a helper method
+to format those. 
+
+What was the most challenging part of the workshop, and how did you overcome it?
+
+For me, the most challenging part of the workshop was setting up the LoanController. Having to recognize
+which controls were for which other controller and setting up the calculation was a difficult process.
+It took some planning to figure out what exactly I needed in terms of calculation and then figuring out
+For giving the controls to the correct controllers, I had to really plan and set up what I needed each 
+controller to do, or figure out what exactly they should be doing. Following my designs, I was able to
+accomplish this by looking at what each part of the loan building does and designate what each controller
+will do.
+
+What new skills or concepts did you learn that you found valuable?
+
+Direct injecting was a fun concept to learn, that you can inject dependencies into modules.
+It allowed for the whole program to be more decoupled, and when I was debugging, it made
+the process a bit easier, being able to determine any errors I had and trace it back to
+the module causing errors.
+
+If you were to extend this application, what additional features would you add?
+If I were to extend the application, I think I would add an actual connection to a database
+to save users and loan rates. I think I would also add in hashing to keep the user information
+safe and private. 
