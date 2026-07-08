@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.apd545project.controller.FeedbackController">
+
+    <top>
+        <VBox spacing="10.0">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Label text="Feedback Management" />
+         <VBox prefHeight="75.0" prefWidth="760.0">
+            <children>
+               <HBox prefHeight="35.0" prefWidth="760.0" spacing="10.0">
+                  <children>
+                         <ComboBox fx:id="sentimentComboBox" promptText="Sentiment" />
+                         <TextField fx:id="guestField" promptText="Guest name" />
+                         <Button onAction="#onFilterFeedback" text="Search" />
+                         <Button onAction="#onClearFilters" text="Clear" />
+                  </children>
+               </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                      <ComboBox fx:id="ratingComboBox" promptText="Rating" />
+                      <DatePicker fx:id="fromDatePicker" promptText="From date" />
+                      <DatePicker fx:id="toDatePicker" promptText="To date" />
+                  </HBox>
+            </children>
+         </VBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10.0">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <TableView fx:id="feedbackTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="reservationIdColumn" prefWidth="90.0" text="Reservation #" />
+                    <TableColumn fx:id="guestColumn" prefWidth="130.0" text="Guest" />
+                    <TableColumn fx:id="ratingColumn" prefWidth="70.0" text="Rating" />
+                    <TableColumn fx:id="commentColumn" prefWidth="260.0" text="Comment" />
+                    <TableColumn fx:id="dateColumn" prefWidth="100.0" text="Date" />
+                    <TableColumn fx:id="sentimentColumn" prefWidth="100.0" text="Sentiment" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <Label fx:id="averageRatingLabel" text="Average Rating: -" />
+            <Button onAction="#onExportFeedback" text="Export CSV" />
+            <Button cancelButton="true" onAction="#onClose" text="Close" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.apd545project.controller.AdminController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <padding>
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+            </padding>
+            <Label fx:id="welcomeLabel" text="Welcome, Admin" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#onOpenWaitlist" text="Waitlist" />
+            <Button onAction="#onOpenFeedback" text="Feedback" />
+            <Button onAction="#onOpenLoyalty" text="Loyalty" />
+            <Button onAction="#onLogout" text="Logout" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="12.0">
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
+            </padding>
+
+            <Label text="Search Guests &amp; Reservations" />
+
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <TextField fx:id="nameField" promptText="Guest name" />
+                <TextField fx:id="phoneField" promptText="Phone number" />
+                <DatePicker fx:id="fromDatePicker" promptText="From date" />
+                <DatePicker fx:id="toDatePicker" promptText="To date" />
+                <ComboBox fx:id="statusComboBox" promptText="Status" />
+                <Button onAction="#onSearch" text="Search" />
+                <Button onAction="#onClearFilters" text="Clear" />
+            </HBox>
+
+            <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="guestNameColumn" prefWidth="140.0" text="Guest" />
+                    <TableColumn fx:id="phoneColumn" prefWidth="110.0" text="Phone" />
+                    <TableColumn fx:id="checkInColumn" prefWidth="100.0" text="Check-In" />
+                    <TableColumn fx:id="checkOutColumn" prefWidth="100.0" text="Check-Out" />
+                    <TableColumn fx:id="roomsColumn" prefWidth="120.0" text="Room(s)" />
+                    <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
+                    <TableColumn fx:id="balanceColumn" prefWidth="100.0" text="Balance" />
+                </columns>
+            </TableView>
+
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Button onAction="#onViewDetails" text="View Details" />
+                <Button onAction="#onNewReservation" text="New Reservation (Phone)" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Pagination fx:id="resultsPagination" pageCount="0" prefWidth="300.0" />
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

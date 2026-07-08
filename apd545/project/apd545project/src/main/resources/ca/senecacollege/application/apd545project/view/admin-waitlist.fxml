@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="600.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.apd545project.controller.AdminController">
+
+    <top>
+        <VBox spacing="10.0">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Label text="Add Guest to Waitlist" />
+         <VBox prefHeight="70.0" prefWidth="660.0">
+            <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="660.0" spacing="10.0">
+                      <TextField fx:id="guestNameField" promptText="Guest name" />
+                      <TextField fx:id="phoneField" promptText="Phone number" />
+                      <ComboBox fx:id="roomTypeComboBox" promptText="Room type" />
+                  </HBox>
+               <HBox prefHeight="45.0" prefWidth="660.0" spacing="10.0">
+                  <children>
+                         <DatePicker fx:id="fromDatePicker" promptText="From date" />
+                         <DatePicker fx:id="toDatePicker" promptText="To date" />
+                         <Button onAction="#onAddToWaitlist" text="Add" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox prefHeight="473.0" prefWidth="670.0" spacing="10.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <Label text="Waitlist" />
+            <TableView fx:id="waitlistTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="guestColumn" prefWidth="125.0" text="Guest" />
+                    <TableColumn fx:id="phoneColumn" prefWidth="125.0" text="Phone" />
+                    <TableColumn fx:id="roomTypeColumn" prefWidth="100.0" text="Room Type" />
+                    <TableColumn fx:id="dateRangeColumn" prefWidth="160.0" text="Date Range" />
+                    <TableColumn fx:id="addedOnColumn" prefWidth="82.0" text="Added On" />
+                    <TableColumn fx:id="waitlistStatusColumn" prefWidth="108.0" text="Status" />
+                </columns>
+            </TableView>
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                <Button onAction="#onConvertToReservation" text="Convert to Reservation" />
+                <Button onAction="#onRemoveFromWaitlist" text="Remove" />
+                <Button cancelButton="true" onAction="#onClose" text="Close" />
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

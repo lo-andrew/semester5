@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="600.0" prefWidth="750.0"
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ca.senecacollege.application.apd545project.controller.LoyaltyController">
+
+    <top>
+        <VBox spacing="10.0">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Label text="Loyalty Dashboard" />
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <TextField fx:id="guestSearchField" promptText="Search guest name or phone" />
+                <Button onAction="#onSearchGuest" text="Search" />
+                <Button onAction="#onEnrollGuest" text="Enroll Guest" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+                <Label fx:id="loyaltyNumberLabel" text="Loyalty #: -" />
+                <Label fx:id="pointsBalanceLabel" text="Points Balance: 0" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane>
+            <Tab closable="false" text="Earning History">
+                <TableView fx:id="earningHistoryTable">
+                    <columns>
+                        <TableColumn fx:id="earningDateColumn" prefWidth="120.0" text="Date" />
+                        <TableColumn fx:id="earningReservationColumn" prefWidth="110.0" text="Reservation #" />
+                        <TableColumn fx:id="earningAmountColumn" prefWidth="120.0" text="Amount Paid" />
+                        <TableColumn fx:id="earningPointsColumn" prefWidth="120.0" text="Points Earned" />
+                    </columns>
+                </TableView>
+            </Tab>
+            <Tab closable="false" text="Redemption History">
+                <TableView fx:id="redemptionHistoryTable">
+                    <columns>
+                        <TableColumn fx:id="redemptionDateColumn" prefWidth="120.0" text="Date" />
+                        <TableColumn fx:id="redemptionPointsColumn" prefWidth="120.0" text="Points Redeemed" />
+                        <TableColumn fx:id="redemptionDiscountColumn" prefWidth="120.0" text="Discount Applied" />
+                        <TableColumn fx:id="redemptionReservationColumn" prefWidth="110.0" text="Reservation #" />
+                    </columns>
+                </TableView>
+            </Tab>
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <Label text="Redeem Points" />
+            <TextField fx:id="redeemPointsField" prefWidth="100.0" promptText="Points" />
+            <Button onAction="#onRedeemPoints" text="Redeem" />
+            <Button cancelButton="true" onAction="#onClose" text="Close" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

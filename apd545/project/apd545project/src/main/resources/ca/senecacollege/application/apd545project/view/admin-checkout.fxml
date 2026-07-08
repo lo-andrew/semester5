@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="root" prefHeight="600.0" prefWidth="560.0" spacing="14.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.apd545project.controller.AdminController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label fx:id="reservationSummaryLabel" text="Reservation #0000 - Guest Name" />
+
+    <Label text="Final Bill" />
+    <TableView fx:id="billTable" prefHeight="291.0" prefWidth="520.0" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="descriptionColumn" prefWidth="300.0" text="Description" />
+            <TableColumn fx:id="amountColumn" prefWidth="202.0" text="Amount" />
+        </columns>
+    </TableView>
+
+    <VBox spacing="4.0">
+        <Label fx:id="subtotalLabel" text="Subtotal: $0.00" />
+        <Label fx:id="taxLabel" text="Tax: $0.00" />
+        <Label fx:id="discountLabel" text="Discount: $0.00" />
+        <Label fx:id="totalLabel" text="Total: $0.00" />
+        <Label fx:id="outstandingBalanceLabel" text="Outstanding Balance: $0.00">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+    </VBox>
+
+    <Label fx:id="feedbackReminderLabel" text="Remind guest to submit feedback at the kiosk." wrapText="true" />
+
+    <Region VBox.vgrow="ALWAYS" />
+
+    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+        <Button onAction="#onSettleBalance" text="Settle Balance" />
+        <Button onAction="#onMarkRoomsAvailable" text="Mark Rooms Available" />
+        <Button cancelButton="true" onAction="#onClose" text="Close" />
+    </HBox>
+
+</VBox>

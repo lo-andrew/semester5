@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" prefHeight="600.0" prefWidth="560.0" spacing="14.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.apd545project.controller.AdminController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label fx:id="reservationSummaryLabel" text="Reservation #0000 - Guest Name" />
+
+    <HBox spacing="20.0">
+        <Label fx:id="totalLabel" text="Total: $0.00" />
+        <Label fx:id="paidLabel" text="Paid: $0.00" />
+        <Label fx:id="balanceLabel" text="Balance: $0.00" />
+    </HBox>
+
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <Label text="Discount %" />
+        <TextField fx:id="discountField" prefWidth="80.0" />
+        <Button onAction="#onApplyDiscount" text="Apply Discount" />
+        <Label fx:id="discountCapLabel" text="(role cap applies)" />
+    </HBox>
+
+    <VBox spacing="4.0">
+        <Label text="Payment Method" />
+        <ComboBox fx:id="paymentMethodComboBox" promptText="Select Method" />
+    </VBox>
+
+    <VBox spacing="4.0">
+        <Label text="Payment Type" />
+        <ComboBox fx:id="paymentTypeComboBox" promptText="Select Type" />
+    </VBox>
+
+    <VBox spacing="4.0">
+        <Label text="Amount" />
+        <TextField fx:id="amountField" promptText="0.00" />
+    </VBox>
+
+    <Button onAction="#onSubmitPayment" text="Submit Payment" />
+
+    <Label text="Payment History" />
+    <TableView fx:id="paymentHistoryTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="paymentDateColumn" prefWidth="120.0" text="Date" />
+            <TableColumn fx:id="paymentMethodColumn" prefWidth="100.0" text="Method" />
+            <TableColumn fx:id="paymentTypeColumn" prefWidth="100.0" text="Type" />
+            <TableColumn fx:id="paymentAmountColumn" prefWidth="100.0" text="Amount" />
+        </columns>
+    </TableView>
+
+    <Region VBox.vgrow="ALWAYS" />
+
+    <HBox alignment="CENTER_RIGHT">
+        <Button cancelButton="true" onAction="#onClose" text="Close" />
+    </HBox>
+
+</VBox>
