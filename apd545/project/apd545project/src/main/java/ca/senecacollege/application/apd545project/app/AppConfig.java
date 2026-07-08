@@ -24,7 +24,7 @@ public class AppConfig {
 
     private void loadKioskViews() throws IOException {
         Map<KioskStep, String> steps = Map.of(
-            KioskStep.WELCOME,       "kiosk-step-welcome.fxml",
+            KioskStep.WELCOME,       "welcome-page.fxml",
             KioskStep.OCCUPANCY,     "kiosk-step-occupancy.fxml",
             KioskStep.DATES,         "kiosk-step-dates.fxml",
             KioskStep.ROOMS,         "kiosk-step-rooms.fxml",

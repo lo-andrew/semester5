@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+// placeholder for reservation
+
 public class BookingSession {
     public int adults;
     public int children;
