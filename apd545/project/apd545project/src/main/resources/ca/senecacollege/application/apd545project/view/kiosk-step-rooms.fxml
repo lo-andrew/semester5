@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -22,12 +24,12 @@
       </font></Label>
 
     <HBox alignment="CENTER" spacing="30.0">
-        <RadioButton fx:id="suggestedRadio" selected="true" text="Use suggested plan">
+        <RadioButton fx:id="suggestedRadio" onAction="#onSuggestedModeSelected" selected="true" text="Use suggested plan">
             <toggleGroup>
                 <ToggleGroup fx:id="selectionMode" />
             </toggleGroup>
         </RadioButton>
-        <RadioButton fx:id="customRadio" text="Choose my own" toggleGroup="$selectionMode" />
+        <RadioButton fx:id="customRadio" onAction="#onCustomModeSelected" text="Choose my own" toggleGroup="$selectionMode" />
     </HBox>
 
     <VBox fx:id="suggestedPanel" spacing="10.0">
@@ -36,8 +38,32 @@
     </VBox>
 
     <VBox fx:id="customPanel" managed="false" spacing="10.0" visible="false">
-        <Label text="Note: Please review the room booking policy before selecting." />
-        <ListView fx:id="availableRoomsList" prefHeight="180.0" />
+        <Label text="Note: Please review the room booking policy before selecting." wrapText="true" />
+
+        <Label text="Available Room Types" />
+        <TableView fx:id="customRoomsTable" prefHeight="150.0">
+            <columns>
+                <TableColumn fx:id="customRoomTypeColumn" prefWidth="150.0" text="Room Type" />
+                <TableColumn fx:id="customQuantityColumn" prefWidth="90.0" text="Available" />
+                <TableColumn fx:id="customPriceColumn" prefWidth="110.0" text="Price/Night" />
+            </columns>
+        </TableView>
+
+        <HBox alignment="CENTER_LEFT" spacing="15.0">
+            <Button onAction="#onAddSelectedRoom" text="Add" />
+            <Button onAction="#onRemoveSelectedRoom" text="Remove" />
+        </HBox>
+
+        <Label text="Added Rooms" />
+        <TableView fx:id="addedRoomsTable" prefHeight="150.0">
+            <columns>
+                <TableColumn fx:id="addedRoomTypeColumn" prefWidth="150.0" text="Room Type" />
+                <TableColumn fx:id="addedQuantityColumn" prefWidth="90.0" text="Quantity" />
+                <TableColumn fx:id="addedPriceColumn" prefWidth="110.0" text="Price/Night" />
+            </columns>
+        </TableView>
+
+        <Label fx:id="customSelectionSummaryLabel" text="Selected: 0 rooms, 0 total occupancy" />
     </VBox>
 
     <Label fx:id="errorLabel" text="" wrapText="true" />
@@ -46,6 +72,6 @@
 
     <HBox alignment="CENTER_RIGHT" spacing="15.0">
         <Button onAction="#onRoomsBack" prefHeight="40.0" prefWidth="90.0" text="Back" />
-        <Button defaultButton="true" onAction="#onRoomsNext" prefHeight="40.0" prefWidth="90.0" text="Next" />
+        <Button defaultButton="true" onAction="#onRoomsNext" prefHeight="40.0" prefWidth="90.0" styleClass="next-btn" text="Next" />
     </HBox>
 </VBox>

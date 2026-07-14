@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" spacing="15.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="40.0" left="60.0" right="60.0" top="40.0" />
     </padding>
@@ -41,6 +41,13 @@
         <Label fx:id="taxLabel" text="—" />
     </HBox>
     <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <Label prefWidth="200.0" text="Seasonal Discount">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font></Label>
+        <Label fx:id="seasonalDiscountLabel" text="—" />
+    </HBox>
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
         <Label prefWidth="200.0" text="Loyalty Discount">
          <font>
             <Font name="System Italic" size="12.0" />
@@ -62,6 +69,6 @@
 
     <HBox alignment="CENTER_RIGHT" spacing="15.0">
         <Button onAction="#onSummaryBack" prefHeight="40.0" prefWidth="90.0" text="Back" />
-        <Button defaultButton="true" onAction="#onConfirm" prefHeight="40.0" prefWidth="112.0" text="Confirm Booking" />
+        <Button onAction="#onConfirm" prefHeight="40.0" prefWidth="125.0" styleClass="next-btn" text="Confirm Booking" />
     </HBox>
 </VBox>

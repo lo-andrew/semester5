@@ -16,7 +16,7 @@
 
     <Label text="How many guests?">
       <font>
-         <Font size="26.0" />
+         <Font name="System Bold" size="26.0" />
       </font></Label>
 
     <HBox alignment="CENTER_LEFT" spacing="20.0">
@@ -35,6 +35,6 @@
 
     <HBox alignment="CENTER_RIGHT" spacing="15.0">
         <Button onAction="#onOccupancyBack" prefHeight="40.0" prefWidth="90.0" text="Back" />
-        <Button defaultButton="true" onAction="#onOccupancyNext" prefHeight="40.0" prefWidth="90.0" text="Next" />
+        <Button defaultButton="true" onAction="#onOccupancyNext" prefHeight="40.0" prefWidth="90.0" styleClass="next-btn" text="Next" />
     </HBox>
 </VBox>

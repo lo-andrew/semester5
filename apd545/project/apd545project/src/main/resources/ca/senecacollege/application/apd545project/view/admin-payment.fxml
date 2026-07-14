@@ -22,6 +22,7 @@
         <Label fx:id="totalLabel" text="Total: $0.00" />
         <Label fx:id="paidLabel" text="Paid: $0.00" />
         <Label fx:id="balanceLabel" text="Balance: $0.00" />
+        <Label fx:id="seasonalDiscountLabel" text="Seasonal Discount: $0.00 (0%)" />
     </HBox>
 
     <HBox alignment="CENTER_LEFT" spacing="10.0">

@@ -23,7 +23,7 @@ public class HelloApplication extends Application {
 
         appConfig.getKioskController().showInitialView();
 
-        stage.setTitle("The Seneca Hotel - Kiosk");
+        stage.setTitle("The Seneca Hotel");
         stage.setScene(scene);
         stage.show();
     }

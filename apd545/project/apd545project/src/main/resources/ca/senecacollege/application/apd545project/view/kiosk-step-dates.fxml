@@ -36,6 +36,6 @@
 
     <HBox alignment="CENTER_RIGHT" spacing="15.0">
         <Button onAction="#onDatesBack" prefHeight="40.0" prefWidth="90.0" text="Back" />
-        <Button defaultButton="true" onAction="#onDatesNext" prefHeight="40.0" prefWidth="90.0" text="Next" />
+        <Button defaultButton="true" onAction="#onDatesNext" prefHeight="40.0" prefWidth="90.0" styleClass="next-btn" text="Next" />
     </HBox>
 </VBox>

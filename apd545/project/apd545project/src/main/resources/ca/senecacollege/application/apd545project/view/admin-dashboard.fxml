@@ -26,6 +26,7 @@
             <Button onAction="#onOpenWaitlist" text="Waitlist" />
             <Button onAction="#onOpenFeedback" text="Feedback" />
             <Button onAction="#onOpenLoyalty" text="Loyalty" />
+            <Button onAction="#onOpenReports" text="Reports" />
             <Button onAction="#onLogout" text="Logout" />
         </HBox>
     </top>

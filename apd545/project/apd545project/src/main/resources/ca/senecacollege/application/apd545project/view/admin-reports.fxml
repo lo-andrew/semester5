@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="650.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ca.senecacollege.application.apd545project.controller.ReportController">
+
+    <center>
+        <TabPane>
+
+            <Tab closable="false" text="Revenue">
+                <VBox spacing="10.0">
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <ComboBox fx:id="revenuePeriodComboBox" promptText="Day / Week / Month" />
+                        <DatePicker fx:id="revenueFromDatePicker" promptText="From date" />
+                        <DatePicker fx:id="revenueToDatePicker" promptText="To date" />
+                        <ComboBox fx:id="revenueRoomTypeComboBox" promptText="Room type" />
+                        <Button onAction="#onRunRevenueReport" text="Run Report" />
+                    </HBox>
+                    <TableView fx:id="revenueTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="revenuePeriodColumn" prefWidth="120.0" text="Period" />
+                            <TableColumn fx:id="revenueCountColumn" prefWidth="120.0" text="Reservation Count" />
+                            <TableColumn fx:id="revenueSubtotalColumn" prefWidth="100.0" text="Subtotal" />
+                            <TableColumn fx:id="revenueTaxColumn" prefWidth="90.0" text="Tax" />
+                            <TableColumn fx:id="revenueDiscountsColumn" prefWidth="100.0" text="Discounts" />
+                            <TableColumn fx:id="revenueTotalColumn" prefWidth="100.0" text="Total" />
+                        </columns>
+                    </TableView>
+                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                        <Button onAction="#onExportRevenueCsv" text="Export CSV" />
+                        <Button onAction="#onExportRevenuePdf" text="Export PDF" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab closable="false" text="Occupancy">
+                <VBox spacing="10.0">
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <ComboBox fx:id="occupancyPeriodComboBox" promptText="Day / Week / Month" />
+                        <DatePicker fx:id="occupancyFromDatePicker" promptText="From date" />
+                        <DatePicker fx:id="occupancyToDatePicker" promptText="To date" />
+                        <ComboBox fx:id="occupancyRoomTypeComboBox" promptText="Room type" />
+                        <Button onAction="#onRunOccupancyReport" text="Run Report" />
+                    </HBox>
+                    <TableView fx:id="occupancyTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="occupancyDateColumn" prefWidth="120.0" text="Date" />
+                            <TableColumn fx:id="roomsAvailableColumn" prefWidth="120.0" text="Rooms Available" />
+                            <TableColumn fx:id="roomsOccupiedColumn" prefWidth="120.0" text="Rooms Occupied" />
+                            <TableColumn fx:id="occupancyPercentColumn" prefWidth="140.0" text="Occupancy %" />
+                        </columns>
+                    </TableView>
+                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                        <Button onAction="#onExportOccupancyCsv" text="Export CSV" />
+                        <Button onAction="#onExportOccupancyPdf" text="Export PDF" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab closable="false" text="Activity Log">
+                <VBox spacing="10.0">
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <DatePicker fx:id="logFromDatePicker" promptText="From date" />
+                        <DatePicker fx:id="logToDatePicker" promptText="To date" />
+                        <TextField fx:id="actorField" promptText="Actor" />
+                        <Button onAction="#onRunActivityLogReport" text="Run Report" />
+                    </HBox>
+                    <TableView fx:id="activityLogTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="logTimestampColumn" prefWidth="140.0" text="Timestamp" />
+                            <TableColumn fx:id="logActorColumn" prefWidth="100.0" text="Actor" />
+                            <TableColumn fx:id="logActionColumn" prefWidth="110.0" text="Action" />
+                            <TableColumn fx:id="logEntityTypeColumn" prefWidth="100.0" text="Entity Type" />
+                            <TableColumn fx:id="logEntityIdColumn" prefWidth="90.0" text="Entity ID" />
+                            <TableColumn fx:id="logMessageColumn" prefWidth="220.0" text="Message" />
+                        </columns>
+                    </TableView>
+                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                        <Button onAction="#onExportActivityLogCsv" text="Export CSV" />
+                        <Button onAction="#onExportActivityLogTxt" text="Export TXT" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT">
+            <padding>
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+            </padding>
+            <Button cancelButton="true" onAction="#onClose" text="Close" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

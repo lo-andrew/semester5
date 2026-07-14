@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="25.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="527.0" prefWidth="560.0" spacing="5.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
     </padding>
@@ -22,9 +22,12 @@
     <Label fx:id="subMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="520.0" style="-fx-font-size: 16px; -fx-text-fill: #555555;" text="Book your stay in just a few easy steps!" textAlignment="CENTER" wrapText="true" />
 
     <StackPane prefHeight="220.0" prefWidth="480.0">
-        <ImageView fx:id="instructionalImageView" fitHeight="243.0" fitWidth="480.0" preserveRatio="true" />
+        <ImageView fx:id="instructionalImageView" fitHeight="198.0" fitWidth="480.0" preserveRatio="true" />
         <Label fx:id="instructionalPlaceholderLabel" text="Optional instructional video / GIF" />
     </StackPane>
 
-    <Button fx:id="startBookingButton" defaultButton="true" onAction="#onWelcomeNext" prefHeight="40.0" prefWidth="112.0" text="Start Booking" />
+          <Button fx:id="startBookingButton" onAction="#onWelcomeNext" prefHeight="40.0" prefWidth="112.0" styleClass="next-btn" text="Start Booking" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
 </VBox>

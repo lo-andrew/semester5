@@ -40,6 +40,10 @@ public class AppConfig {
             loader.setController(kioskController);
             Parent view = loader.load();
             sceneRepository.addView(entry.getKey(), view);
+
+            if (entry.getKey() == KioskStep.ROOMS) {
+                kioskController.populateRoomsPlaceholders();
+            }
         }
     }
 

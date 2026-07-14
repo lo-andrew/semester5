@@ -6,14 +6,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" prefHeight="600.0" prefWidth="960.0" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.apd545project.controller.KioskController">
+<BorderPane fx:id="root" prefHeight="600.0" prefWidth="960.0" style="-fx-background-color: #F5F5F5;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.apd545project.controller.KioskController">
 
     <left>
         <VBox alignment="BOTTOM_CENTER" prefHeight="600.0" prefWidth="143.0" spacing="20.0" style="-fx-background-color: #1B3A57;">
             <padding>
                 <Insets bottom="30.0" left="15.0" right="15.0" top="30.0" />
             </padding>
-            <Button fx:id="rulesButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onViewRules" prefHeight="25.0" prefWidth="125.0" text="Rules &amp; Regulations" wrapText="true">
+            <Button fx:id="rulesButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onViewRules" prefHeight="25.0" prefWidth="125.0" styleClass="rules-button" text="Rules &amp; Regulations" wrapText="true">
+                <font>
+                    <Font size="10.0" />
+                </font>
+            </Button>
+            <Button fx:id="leaveFeedbackButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onLeaveFeedback" prefHeight="25.0" prefWidth="125.0" styleClass="feedback-button" text="Leave Feedback" wrapText="true">
+                <font>
+                    <Font size="10.0" />
+                </font>
+            </Button>
+            <Button fx:id="staffLoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onStaffLogin" prefHeight="25.0" prefWidth="125.0" styleClass="staff-login-button" text="Staff Login" wrapText="true">
                 <font>
                     <Font size="10.0" />
                 </font>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="root" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="700.0" spacing="20.0"
+      xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ca.senecacollege.application.apd545project.controller.FeedbackController">
+    <padding>
+        <Insets bottom="40.0" left="60.0" right="60.0" top="40.0" />
+    </padding>
+
+    <Label text="We'd Love Your Feedback">
+        <font>
+            <Font name="System Bold" size="26.0" />
+        </font>
+    </Label>
+
+    <VBox fx:id="feedbackPanel" spacing="15.0">
+        <Label fx:id="guestGreetingLabel" text="Thanks for staying with us!" wrapText="true" />
+
+        <VBox spacing="4.0">
+            <Label text="How would you rate your stay? *" />
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <ToggleButton fx:id="star1Toggle" onAction="#onStarSelected" text="1" userData="1">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="starRatingGroup" />
+                    </toggleGroup>
+                </ToggleButton>
+                <ToggleButton fx:id="star2Toggle" onAction="#onStarSelected" text="2" toggleGroup="$starRatingGroup" userData="2" />
+                <ToggleButton fx:id="star3Toggle" onAction="#onStarSelected" text="3" toggleGroup="$starRatingGroup" userData="3" />
+                <ToggleButton fx:id="star4Toggle" onAction="#onStarSelected" text="4" toggleGroup="$starRatingGroup" userData="4" />
+                <ToggleButton fx:id="star5Toggle" onAction="#onStarSelected" text="5" toggleGroup="$starRatingGroup" userData="5" />
+            </HBox>
+            <Label fx:id="ratingError" text="" />
+        </VBox>
+
+        <VBox spacing="4.0">
+            <Label text="Comments" />
+            <TextArea fx:id="commentArea" onKeyReleased="#onCommentChanged" prefRowCount="5" promptText="Tell us about your stay..." wrapText="true" />
+            <Label fx:id="commentCharCountLabel" text="0 / 500" />
+        </VBox>
+
+        <Button defaultButton="true" onAction="#onSubmitFeedback" text="Submit Feedback" />
+    </VBox>
+
+    <VBox fx:id="confirmationPanel" alignment="CENTER" managed="false" spacing="15.0" visible="false">
+        <Label fx:id="confirmationMessageLabel" text="Thank you for your feedback!" wrapText="true">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Button onAction="#onFeedbackDone" text="Done" />
+    </VBox>
+
+    <Region VBox.vgrow="ALWAYS" />
+</VBox>

@@ -1,0 +1,38 @@
+.rules-button {
+    -fx-background-color: #FBBF24;
+}
+
+.rules-button:hover {
+    -fx-background-color: #ff950a;
+}
+
+.next-btn {
+    -fx-background-color: #4299e1;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.next-btn:hover {
+    -fx-background-color: #2B6DB1;
+}
+
+.staff-login-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #9CA3AF;
+    -fx-border-color: #9CA3AF;
+    -fx-border-radius: 3px;
+}
+
+.staff-login-button:hover {
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #FFFFFF;
+}
+
+.feedback-button {
+    -fx-background-color: #10B981;
+    -fx-text-fill: white;
+}
+
+.feedback-button:hover {
+    -fx-background-color: #059669;
+}

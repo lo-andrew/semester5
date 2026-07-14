@@ -1,0 +1,186 @@
+/* theme */
+.root {
+    -nexus-primary: #2F3C7E;
+    -nexus-primary-dark: #232C5E;
+    -nexus-accent: #3B82F6;
+    -nexus-success: #16A34A;
+    -nexus-danger: #DC2626;
+    -nexus-bg: #F5F7FA;
+    -nexus-surface: #FFFFFF;
+    -nexus-border: #D9DEE4;
+    -nexus-text: #1F2937;
+    -nexus-muted: #6B7280;
+
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-background-color: -nexus-bg;
+    -fx-text-fill: -nexus-text;
+}
+
+/* font */
+
+.app-title {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -nexus-primary;
+}
+
+.app-subtitle {
+    -fx-font-size: 22px;
+    -fx-text-fill: -nexus-muted;
+}
+
+.section-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -nexus-primary;
+}
+
+.field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -nexus-muted;
+}
+
+.project-type-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -nexus-muted;
+}
+
+.total-cost-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -nexus-success;
+}
+
+.error-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -nexus-danger;
+}
+
+.projected-load-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -nexus-text;
+}
+
+.projected-load-label.load-ok {
+    -fx-text-fill: -nexus-success;
+}
+
+.projected-load-label.load-over {
+    -fx-text-fill: -nexus-danger;
+}
+
+/* inputs */
+
+.text-field,
+.password-field,
+.combo-box,
+.choice-box {
+    -fx-background-color: -nexus-surface;
+    -fx-border-color: -nexus-border;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 5px 8px;
+}
+
+.text-field:focused,
+.password-field:focused,
+.combo-box:focused,
+.choice-box:focused {
+    -fx-border-color: -nexus-accent;
+}
+
+/* buttons */
+
+.button {
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.primary-button {
+    -fx-background-color: -nexus-primary;
+    -fx-text-fill: white;
+}
+
+.primary-button:hover {
+    -fx-background-color: -nexus-primary-dark;
+}
+
+.primary-button:pressed {
+    -fx-background-color: derive(-nexus-primary-dark, -15%);
+}
+
+.primary-button:disabled {
+    -fx-opacity: 0.5;
+}
+
+.secondary-button {
+    -fx-background-color: transparent;
+    -fx-border-color: -nexus-border;
+    -fx-border-radius: 4px;
+    -fx-text-fill: -nexus-text;
+}
+
+.secondary-button:hover {
+    -fx-background-color: derive(-nexus-bg, -5%);
+}
+
+/* tables */
+
+.list-view,
+.table-view {
+    -fx-background-color: -nexus-surface;
+    -fx-border-color: -nexus-border;
+}
+
+.list-view .list-cell:filled:selected,
+.table-view .table-row-cell:selected {
+    -fx-background-color: -nexus-accent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -nexus-primary;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: derive(-nexus-bg, 40%);
+}
+
+/* panels */
+
+.split-pane {
+    -fx-background-color: -nexus-bg;
+    -fx-padding: 0;
+}
+
+.split-pane-divider {
+    -fx-background-color: -nexus-border;
+}
+
+.toolbar-bar {
+    -fx-background-color: -nexus-surface;
+    -fx-border-color: transparent transparent -nexus-border transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.card {
+    -fx-background-color: -nexus-surface;
+    -fx-border-color: -nexus-border;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
