@@ -6,7 +6,20 @@ import javafx.collections.ObservableList;
 public abstract class Employee {
     private StringProperty id;
     private StringProperty name;
+    private StringProperty email;
     private ObservableList<String> skills;
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
+    }
 
     public String getId() {
         return id.get();
@@ -40,9 +53,10 @@ public abstract class Employee {
         this.skills = skills;
     }
 
-    public Employee(StringProperty id, StringProperty name, ObservableList<String> skills) {
+    public Employee(StringProperty id, StringProperty name, StringProperty email, ObservableList<String> skills) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.skills = skills;
     }
 
