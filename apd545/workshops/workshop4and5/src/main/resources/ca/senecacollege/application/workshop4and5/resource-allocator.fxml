@@ -20,7 +20,7 @@
          <children>
             <Label styleClass="section-title" text="New Assignment" />
             <Label styleClass="field-label" text="Skill Filter" />
-            <ComboBox fx:id="skillFilterComboBox" prefWidth="220.0" promptText="All Skills" />
+            <ComboBox fx:id="skillFilterComboBox" prefWidth="220.0" promptText="All Skills" onAction="#handleSkillFilter"/>
             <Label styleClass="field-label" text="Employee" />
             <ComboBox fx:id="employeeComboBox" prefWidth="220.0" promptText="Select Employee" />
             <Label styleClass="field-label" text="Role" />

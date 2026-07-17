@@ -1,6 +1,7 @@
 package ca.senecacollege.application.workshop4and5.controllers;
 
 import ca.senecacollege.application.workshop4and5.data.EmployeeRepository;
+import ca.senecacollege.application.workshop4and5.models.Employee;
 import ca.senecacollege.application.workshop4and5.services.ResourceService;
 import com.google.inject.Inject;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
 
 /**
  * Controller for the Resource Allocator dialog (resource-allocator.fxml).
@@ -29,7 +31,7 @@ public class AllocatorController {
     private ComboBox<String> skillFilterComboBox;
 
     @FXML
-    private ComboBox<String> employeeComboBox;
+    private ComboBox<Employee> employeeComboBox;
 
     @FXML
     private TextField roleField;
@@ -75,6 +77,28 @@ public class AllocatorController {
         projectedLoadLabel.setText("0 / 40 hrs");
         // TODO (backend step): populate skillFilterComboBox/employeeComboBox from EmployeeRepository,
         // and add the live-hours listener described above.
+
+        skillFilterComboBox.getItems().add("All Skills");
+        empRepo.findAll().forEach(e ->
+                e.getSkills().forEach(skill -> {
+                    if (!skillFilterComboBox.getItems().contains(skill)) {
+                        skillFilterComboBox.getItems().add(skill);
+                    }
+                })
+        );
+
+        employeeComboBox.setConverter(new StringConverter<Employee>() {
+            @Override
+            public String toString(Employee employee) {
+                return employee == null ? "" : employee.getName();
+            }
+
+            @Override
+            public Employee fromString(String string) {
+                return null; // combo box isn't editable, never called
+            }
+        });
+        employeeComboBox.getItems().addAll(empRepo.findAll());
     }
 
     @FXML
@@ -85,12 +109,14 @@ public class AllocatorController {
 
     @FXML
     public void handleSkillFilter(){
-
+        String selectedSkill = skillFilterComboBox.getValue();
+        employeeComboBox.setItems(empRepo.filterBySkill(selectedSkill));
+        employeeComboBox.getSelectionModel().clearSelection();
     }
 
     @FXML
     public void handleLiveBalancing(){
-
+        
     }
 
     @FXML

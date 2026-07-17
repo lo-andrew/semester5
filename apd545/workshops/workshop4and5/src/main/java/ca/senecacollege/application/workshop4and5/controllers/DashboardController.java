@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -108,6 +109,17 @@ public class DashboardController {
 
         filteredProjects = new FilteredList<>(projRepo.findAll(), p -> true);
         projectListView.setItems(filteredProjects);
+
+        // Without this, ListView falls back to Object.toString() for each row,
+        // which is why it was showing "ca.senecacollege...FixedPriceProject@6001aa38"
+        // instead of the project title.
+        projectListView.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(Project project, boolean empty) {
+                super.updateItem(project, empty);
+                setText(empty || project == null ? null : project.getTitle());
+            }
+        });
 
         // Live filtering: re-run handleFilter() whenever either input changes,
         // rather than waiting on a button click / Enter key.

@@ -35,7 +35,7 @@
       </HBox>
    </top>
    <left>
-      <ListView fx:id="projectListView" prefHeight="800.0" prefWidth="260.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="projectListView" prefHeight="800.0" prefWidth="330.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="card" BorderPane.alignment="CENTER">

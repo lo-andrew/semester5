@@ -15,12 +15,10 @@ import javafx.collections.ObservableList;
 import java.util.stream.Collectors;
 
 public class ResourceService {
-    private final EmployeeRepository employeeRepository;
     private final ProjectRepository projectRepository;
 
     @Inject
-    public ResourceService(EmployeeRepository employeeRepository, ProjectRepository projectRepository) {
-        this.employeeRepository = employeeRepository;
+    public ResourceService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
