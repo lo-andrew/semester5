@@ -9,20 +9,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+/**
+ * Lifecycle is managed by Guice (bound as a singleton in AppModule), rather
+ * than a hand-rolled getInstance() - the manual instantiation the workshop
+ * spec asks us to avoid.
+ */
 public class EmployeeRepository {
-    private static EmployeeRepository instance;
 
     private final ObservableList<Employee> allEmployees = FXCollections.observableArrayList();
 
-    private EmployeeRepository(){
+    EmployeeRepository(){
         seedData();
-    }
-
-    public static EmployeeRepository getInstance() {
-        if (instance == null) {
-            instance = new EmployeeRepository();
-        }
-        return instance;
     }
 
     public ObservableList<Employee> findAll(){
@@ -39,26 +36,31 @@ public class EmployeeRepository {
     private void seedData() {
         allEmployees.add(new InternalStaff(
                 new SimpleStringProperty("1"), new SimpleStringProperty("John Smith"),
+                new SimpleStringProperty("john.smith@nexusconsulting.com"),
                 FXCollections.observableArrayList("Java", "JavaFX", "SQL"),
                 new SimpleDoubleProperty(95000)));
 
         allEmployees.add(new InternalStaff(
                 new SimpleStringProperty("2"), new SimpleStringProperty("Bob Johnson"),
+                new SimpleStringProperty("bob.johnson@nexusconsulting.com"),
                 FXCollections.observableArrayList("Python", "Data Analysis"),
                 new SimpleDoubleProperty(85000)));
 
         allEmployees.add(new ExternalConsultant(
                 new SimpleStringProperty("3"), new SimpleStringProperty("Alice Lee"),
+                new SimpleStringProperty("alice.lee@designpartners.com"),
                 FXCollections.observableArrayList("UI/UX Design", "Figma"),
                 new SimpleDoubleProperty(75), new SimpleStringProperty("Design Partners Inc.")));
 
         allEmployees.add(new InternalStaff(
                 new SimpleStringProperty("4"), new SimpleStringProperty("David Anderson"),
+                new SimpleStringProperty("david.anderson@nexusconsulting.com"),
                 FXCollections.observableArrayList("Project Management", "Agile"),
                 new SimpleDoubleProperty(105000)));
 
         allEmployees.add(new ExternalConsultant(
                 new SimpleStringProperty("5"), new SimpleStringProperty("Ann Grace"),
+                new SimpleStringProperty("ann.grace@cloudworks.com"),
                 FXCollections.observableArrayList("Cloud Architecture", "AWS", "DevOps"),
                 new SimpleDoubleProperty(110), new SimpleStringProperty("CloudWorks Consulting")));
     }

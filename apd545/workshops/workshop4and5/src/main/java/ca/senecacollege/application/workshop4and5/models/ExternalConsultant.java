@@ -8,9 +8,10 @@ public class ExternalConsultant extends Employee {
     private DoubleProperty hourlyRate;
     private StringProperty agencyName;
 
-    public ExternalConsultant(StringProperty id, StringProperty name, ObservableList<String> skills,
-                               DoubleProperty hourlyRate, StringProperty agencyName) {
-        super(id, name, skills);
+    public ExternalConsultant(StringProperty id, StringProperty name, StringProperty email,
+                               ObservableList<String> skills, DoubleProperty hourlyRate,
+                               StringProperty agencyName) {
+        super(id, name, email, skills);
         this.hourlyRate = hourlyRate;
         this.agencyName = agencyName;
     }

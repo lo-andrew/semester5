@@ -2,6 +2,7 @@ package ca.senecacollege.application.workshop4and5.controllers;
 
 import ca.senecacollege.application.workshop4and5.data.EmployeeRepository;
 import ca.senecacollege.application.workshop4and5.services.ResourceService;
+import com.google.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -60,8 +61,14 @@ public class AllocatorController {
     @FXML
     private TableColumn<Object, Number> workloadCostColumn;
 
-    EmployeeRepository empRepo;
-    ResourceService resourceService;
+    private final EmployeeRepository empRepo;
+    private final ResourceService resourceService;
+
+    @Inject
+    public AllocatorController(EmployeeRepository empRepo, ResourceService resourceService) {
+        this.empRepo = empRepo;
+        this.resourceService = resourceService;
+    }
 
     @FXML
     private void initialize() {

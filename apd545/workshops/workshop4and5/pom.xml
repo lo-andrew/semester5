@@ -25,6 +25,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>21.0.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>7.0.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -60,15 +65,13 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>
-                                ca.senecacollege.application.workshop4and5/ca.senecacollege.application.workshop4and5.MainApp
-                            </mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
+                            <!-- Non-modular (classpath) launch: no module-info.java, so this is
+                                 just the fully-qualified class name, not "module/Class". Running
+                                 on the classpath rather than the module path avoids having to
+                                 hand-write module-info "opens"/"requires" for Guice and its
+                                 transitive dependencies (javax.inject, AOP alliance, Guava),
+                                 which is unnecessary complexity for an app this size. -->
+                            <mainClass>ca.senecacollege.application.workshop4and5.MainApp</mainClass>
                         </configuration>
                     </execution>
                 </executions>

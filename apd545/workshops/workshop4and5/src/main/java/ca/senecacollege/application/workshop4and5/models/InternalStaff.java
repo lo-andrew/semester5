@@ -11,9 +11,9 @@ public class InternalStaff extends Employee {
 
     private DoubleProperty annualSalary;
 
-    public InternalStaff(StringProperty id, StringProperty name, ObservableList<String> skills,
-                          DoubleProperty annualSalary) {
-        super(id, name, skills);
+    public InternalStaff(StringProperty id, StringProperty name, StringProperty email,
+                          ObservableList<String> skills, DoubleProperty annualSalary) {
+        super(id, name, email, skills);
         this.annualSalary = annualSalary;
     }
 

@@ -1,9 +1,11 @@
 package ca.senecacollege.application.workshop4and5.data;
 
+import ca.senecacollege.application.workshop4and5.models.Assignment;
 import ca.senecacollege.application.workshop4and5.models.FixedPriceProject;
 import ca.senecacollege.application.workshop4and5.models.Project;
 import ca.senecacollege.application.workshop4and5.models.Status;
 import ca.senecacollege.application.workshop4and5.models.TimeMaterialProject;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,13 +16,16 @@ import static ca.senecacollege.application.workshop4and5.models.Status.ACTIVE;
 import static ca.senecacollege.application.workshop4and5.models.Status.CLOSED;
 import static ca.senecacollege.application.workshop4and5.models.Status.PLANNING;
 
+/**
+ * Lifecycle is managed by Guice (bound as a singleton in AppModule), rather
+ * than a hand-rolled getInstance() - the manual instantiation the workshop
+ * spec asks us to avoid.
+ */
 public class ProjectRepository {
-
-    private static ProjectRepository instance;
 
     private final ObservableList<Project> allProjects = FXCollections.observableArrayList();
 
-    private ProjectRepository() {
+    ProjectRepository() {
 
         // fixed price
         allProjects.add(fixedPriceProject("1", "AI Upgrade", ACTIVE, 50000.0, 0.20));
@@ -37,15 +42,22 @@ public class ProjectRepository {
         allProjects.add(timeMaterialProject("10", "DevOps Tooling", ACTIVE, 160.0));
     }
 
-    public static ProjectRepository getInstance() {
-        if (instance == null) {
-            instance = new ProjectRepository();
-        }
-        return instance;
-    }
-
     public ObservableList<Project> findAll() {
         return allProjects;
+    }
+
+    /**
+     * A plain FXCollections.observableArrayList() only fires a change event
+     * when assignments are added/removed - not when an existing assignment's
+     * allocatedHours is edited in place. Passing an extractor here tells the
+     * list to also treat allocatedHoursProperty() as part of each element's
+     * observable state, so edits to hours invalidate the list too. That's
+     * what lets bindings like DashboardController's totalCostLabel (and
+     * TimeMaterialProject's burnRate) stay live when a table cell is edited.
+     */
+    private ObservableList<Assignment> newAssignmentsList() {
+        return FXCollections.observableArrayList(
+                (Assignment a) -> new Observable[]{a.allocatedHoursProperty()});
     }
 
     /**
@@ -59,7 +71,7 @@ public class ProjectRepository {
                 new SimpleStringProperty(id),
                 new SimpleStringProperty(title),
                 new SimpleObjectProperty<>(status),
-                FXCollections.observableArrayList(),
+                newAssignmentsList(),
                 new SimpleDoubleProperty(maxBudget),
                 new SimpleDoubleProperty(clientMarkup)
         );
@@ -71,7 +83,7 @@ public class ProjectRepository {
                 new SimpleStringProperty(id),
                 new SimpleStringProperty(title),
                 new SimpleObjectProperty<>(status),
-                FXCollections.observableArrayList(),
+                newAssignmentsList(),
                 new SimpleDoubleProperty(hourlyCap)
         );
     }

@@ -6,6 +6,7 @@ import ca.senecacollege.application.workshop4and5.models.Assignment;
 import ca.senecacollege.application.workshop4and5.models.Employee;
 import ca.senecacollege.application.workshop4and5.models.OverAllocationException;
 import ca.senecacollege.application.workshop4and5.models.Project;
+import com.google.inject.Inject;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ public class ResourceService {
     private final EmployeeRepository employeeRepository;
     private final ProjectRepository projectRepository;
 
+    @Inject
     public ResourceService(EmployeeRepository employeeRepository, ProjectRepository projectRepository) {
         this.employeeRepository = employeeRepository;
         this.projectRepository = projectRepository;
