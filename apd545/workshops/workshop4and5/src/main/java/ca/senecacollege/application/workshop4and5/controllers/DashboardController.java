@@ -1,5 +1,10 @@
 package ca.senecacollege.application.workshop4and5.controllers;
 
+import ca.senecacollege.application.workshop4and5.data.ProjectRepository;
+import ca.senecacollege.application.workshop4and5.models.Assignment;
+import ca.senecacollege.application.workshop4and5.models.Project;
+import ca.senecacollege.application.workshop4and5.services.ResourceService;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -12,13 +17,6 @@ import javafx.scene.control.TextField;
 /**
  * Controller for the Portfolio Dashboard (portfolio-dashboard.fxml).
  * Screen 2: Master-detail overview of all projects and their costs.
- * <p>
- * NOTE: TableView/TableColumn/ListView are left untyped for now since the
- * Project/Employee/Assignment domain models don't exist yet (Step 1 of the
- * backend, done as DIY). Once those models exist, parameterize these fields
- * (e.g. TableView&lt;Assignment&gt;, ListView&lt;Project&gt;) and wire:
- *   - FilteredList for the search/status filters
- *   - totalCostLabel bound to the sum of Assignment costs
  */
 public class DashboardController {
 
@@ -29,7 +27,7 @@ public class DashboardController {
     private ChoiceBox<String> statusFilterChoiceBox;
 
     @FXML
-    private ListView<String> projectListView;
+    private ListView<Project> projectListView;
 
     @FXML
     private Label projectTitleLabel;
@@ -41,33 +39,55 @@ public class DashboardController {
     private Label totalCostLabel;
 
     @FXML
-    private TableView<Object> assignmentsTable;
+    private TableView<Assignment> assignmentsTable;
 
     @FXML
-    private TableColumn<Object, String> employeeNameColumn;
+    private TableColumn<Assignment, String> employeeNameColumn;
 
     @FXML
-    private TableColumn<Object, String> roleColumn;
+    private TableColumn<Assignment, String> roleColumn;
 
     @FXML
-    private TableColumn<Object, Number> allocatedHoursColumn;
+    private TableColumn<Assignment, Number> allocatedHoursColumn;
 
     @FXML
-    private TableColumn<Object, Number> costColumn;
+    private TableColumn<Assignment, Number> costColumn;
 
     @FXML
     private Button addTeamMemberBtn;
+
+    ProjectRepository projRepo;
+    ResourceService resourceService;
+
+    private FilteredList<Project> filteredProjects;
 
     @FXML
     private void initialize() {
         statusFilterChoiceBox.getItems().addAll("All", "Active", "Closed");
         statusFilterChoiceBox.setValue("All");
-        // TODO (backend step): populate projectListView from ProjectRepository.findAll(),
-        // hook up FilteredList for search/status, and bind totalCostLabel reactively.
+
+        filteredProjects = new FilteredList<>(projRepo.findAll(), p -> true);
+        projectListView.setItems(filteredProjects);
+
+        // Live filtering: re-run handleFilter() whenever either input changes,
+        // rather than waiting on a button click / Enter key.
+        searchField.textProperty().addListener((obs, oldVal, newVal) -> handleFilter());
+        statusFilterChoiceBox.valueProperty().addListener((obs, oldVal, newVal) -> handleFilter());
+
+        // TODO (next): bind totalCostLabel to the sum of the selected project's
+        // Assignment costs, and populate projectTitleLabel/projectTypeLabel/
+        // assignmentsTable when a project is selected in projectListView.
     }
 
     @FXML
-    private void handleAddTeamMember() {
-        // TODO (backend step): open the Resource Allocator screen for the selected project.
+    private void handleFilter() {
+        String query = searchField.getText() == null ? "" : searchField.getText().trim().toLowerCase();
+        String status = statusFilterChoiceBox.getValue();
+
+        filteredProjects.setPredicate(project -> {
+            boolean matchesTitle = project.getTitle().toLowerCase().contains(query);
+            boolean matchesStatus = "All".equals(status) || project.getStatus().name().equalsIgnoreCase(status);
+            return matchesTitle && matchesStatus;
+        });
     }
 }

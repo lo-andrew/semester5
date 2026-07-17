@@ -1,5 +1,7 @@
 package ca.senecacollege.application.workshop4and5.controllers;
 
+import ca.senecacollege.application.workshop4and5.data.EmployeeRepository;
+import ca.senecacollege.application.workshop4and5.services.ResourceService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -58,6 +60,9 @@ public class AllocatorController {
     @FXML
     private TableColumn<Object, Number> workloadCostColumn;
 
+    EmployeeRepository empRepo;
+    ResourceService resourceService;
+
     @FXML
     private void initialize() {
         projectedLoadLabel.setText("0 / 40 hrs");
@@ -66,13 +71,23 @@ public class AllocatorController {
     }
 
     @FXML
-    private void handleConfirm() {
+    public void handleConfirm() {
         // TODO (backend step): call service.assignTeamMember(project, employee, hours);
         // catch OverAllocationException; close dialog on success.
     }
 
     @FXML
-    private void handleCancel() {
+    public void handleSkillFilter(){
+
+    }
+
+    @FXML
+    public void handleLiveBalancing(){
+
+    }
+
+    @FXML
+    public void handleCancel() {
         // TODO (backend step): discard any in-progress edits to currentWorkloadTable and close the dialog.
     }
 }
