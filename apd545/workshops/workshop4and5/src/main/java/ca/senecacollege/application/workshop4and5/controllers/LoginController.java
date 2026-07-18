@@ -15,10 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-/**
- * Controller for the Login screen (login-view.fxml).
- * Screen 1: Secure entry to the system.
- */
 public class LoginController {
 
     @FXML

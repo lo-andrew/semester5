@@ -20,10 +20,6 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 
-/**
- * Controller for the Resource Allocator dialog (resource-allocator.fxml).
- * Screen 3: Assign staff to a project and resolve scheduling conflicts.
- */
 public class AllocatorController {
 
     @FXML

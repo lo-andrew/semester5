@@ -29,10 +29,6 @@ import javafx.util.converter.NumberStringConverter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-/**
- * Controller for the Portfolio Dashboard (portfolio-dashboard.fxml).
- * Screen 2: Master-detail overview of all projects and their costs.
- */
 public class DashboardController {
 
     @FXML
