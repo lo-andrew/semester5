@@ -9,11 +9,13 @@ public class Assignment {
     private StringProperty role;
     private DoubleProperty allocatedHours;
     private Employee employee;
+    private Project project;
 
-    public Assignment(StringProperty role, DoubleProperty allocatedHours, Employee employee) {
+    public Assignment(StringProperty role, DoubleProperty allocatedHours, Employee employee, Project project) {
         this.role = role;
         this.allocatedHours = allocatedHours;
         this.employee = employee;
+        this.project = project;
     }
 
     public String getRole() {
@@ -46,6 +48,14 @@ public class Assignment {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     /**

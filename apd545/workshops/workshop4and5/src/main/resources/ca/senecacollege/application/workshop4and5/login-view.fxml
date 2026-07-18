@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox alignment="CENTER" prefHeight="900.0" prefWidth="1200.0" spacing="5.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.application.workshop4and5.controllers.LoginController">
    <children>
       <Label alignment="CENTER" prefHeight="48.0" prefWidth="408.0" styleClass="app-title" text="Nexus Consulting" />
@@ -17,13 +16,13 @@
          </VBox.margin>
       </Label>
       <Label prefHeight="17.0" prefWidth="400.0" styleClass="field-label" text="Username" />
-      <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
+      <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="400.0">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
       </TextField>
       <Label prefHeight="17.0" prefWidth="400.0" styleClass="field-label" text="Password" />
-      <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
+      <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="400.0">
          <VBox.margin>
             <Insets bottom="30.0" />
          </VBox.margin>

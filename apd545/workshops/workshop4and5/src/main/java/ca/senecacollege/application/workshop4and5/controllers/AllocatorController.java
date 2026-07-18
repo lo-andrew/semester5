@@ -1,9 +1,13 @@
 package ca.senecacollege.application.workshop4and5.controllers;
 
-import ca.senecacollege.application.workshop4and5.data.EmployeeRepository;
+import ca.senecacollege.application.workshop4and5.models.Assignment;
 import ca.senecacollege.application.workshop4and5.models.Employee;
+import ca.senecacollege.application.workshop4and5.models.OverAllocationException;
+import ca.senecacollege.application.workshop4and5.models.Project;
 import ca.senecacollege.application.workshop4and5.services.ResourceService;
 import com.google.inject.Inject;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -11,19 +15,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import javafx.util.converter.NumberStringConverter;
 
 /**
  * Controller for the Resource Allocator dialog (resource-allocator.fxml).
  * Screen 3: Assign staff to a project and resolve scheduling conflicts.
- * <p>
- * NOTE: Left untyped/unwired pending the domain models and ResourceService
- * (backend DIY step). Planned wiring once those exist:
- *   - employeeComboBox selection -&gt; service.getAssignmentsByEmployee(e) -&gt; currentWorkloadTable
- *   - listener on newHoursField -&gt; recompute projectedLoadLabel; toggle its style class
- *     between "load-ok" and "load-over" (see app.css) instead of setting colors inline
- *   - confirmBtn disabled while projected load &gt; 40
- *   - cancelBtn discards any edits made to currentWorkloadTable without mutating live objects
  */
 public class AllocatorController {
 
@@ -49,37 +48,50 @@ public class AllocatorController {
     private Button cancelBtn;
 
     @FXML
-    private TableView<Object> currentWorkloadTable;
+    private TableView<Assignment> currentWorkloadTable;
 
     @FXML
-    private TableColumn<Object, String> workloadProjectColumn;
+    private TableColumn<Assignment, String> workloadProjectColumn;
 
     @FXML
-    private TableColumn<Object, String> workloadRoleColumn;
+    private TableColumn<Assignment, String> workloadRoleColumn;
 
     @FXML
-    private TableColumn<Object, Number> workloadHoursColumn;
+    private TableColumn<Assignment, Number> workloadHoursColumn;
 
     @FXML
-    private TableColumn<Object, Number> workloadCostColumn;
+    private TableColumn<Assignment, Number> workloadCostColumn;
 
-    private final EmployeeRepository empRepo;
     private final ResourceService resourceService;
+    private Project project;
+
+    public void setProject(Project project){
+        this.project = project;
+    }
 
     @Inject
-    public AllocatorController(EmployeeRepository empRepo, ResourceService resourceService) {
-        this.empRepo = empRepo;
+    public AllocatorController(ResourceService resourceService) {
         this.resourceService = resourceService;
     }
 
     @FXML
     private void initialize() {
         projectedLoadLabel.setText("0 / 40 hrs");
-        // TODO (backend step): populate skillFilterComboBox/employeeComboBox from EmployeeRepository,
-        // and add the live-hours listener described above.
+
+        workloadProjectColumn.setCellValueFactory(cellData -> cellData.getValue().getProject().titleProperty());
+        workloadRoleColumn.setCellValueFactory(cellData -> cellData.getValue().roleProperty());
+        workloadHoursColumn.setCellValueFactory(cellData -> cellData.getValue().allocatedHoursProperty());
+        workloadHoursColumn.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
+        workloadHoursColumn.setOnEditCommit(event -> {
+            event.getRowValue().setAllocatedHours(event.getNewValue().doubleValue());
+            // total needs to catch up here
+            handleLiveBalancing();
+        });
+        workloadCostColumn.setCellValueFactory(cellData ->
+                cellData.getValue().getCost());
 
         skillFilterComboBox.getItems().add("All Skills");
-        empRepo.findAll().forEach(e ->
+        resourceService.getAllEmployees().forEach(e ->
                 e.getSkills().forEach(skill -> {
                     if (!skillFilterComboBox.getItems().contains(skill)) {
                         skillFilterComboBox.getItems().add(skill);
@@ -95,32 +107,83 @@ public class AllocatorController {
 
             @Override
             public Employee fromString(String string) {
-                return null; // combo box isn't editable, never called
+                return null; // combo box not editable so never called
             }
         });
-        employeeComboBox.getItems().addAll(empRepo.findAll());
+        employeeComboBox.getItems().addAll(resourceService.getAllEmployees());
+        newHoursField.textProperty().addListener((obs, oldVal, newVal) -> handleLiveBalancing());
+        employeeComboBox.valueProperty().addListener((obs, oldVal, newVal) -> handleLiveBalancing());
     }
 
     @FXML
     public void handleConfirm() {
-        // TODO (backend step): call service.assignTeamMember(project, employee, hours);
-        // catch OverAllocationException; close dialog on success.
+        Employee selectedEmployee = employeeComboBox.getValue();
+        String role = roleField.getText();
+
+        try {
+            double hours = Double.parseDouble(newHoursField.getText());
+            resourceService.assignTeamMember(project, selectedEmployee, role, hours);
+            Stage stage = (Stage) confirmBtn.getScene().getWindow();
+            stage.close();
+        } catch (OverAllocationException e) {
+            projectedLoadLabel.setText(e.getMessage());
+            projectedLoadLabel.getStyleClass().setAll("projected-load-label", "load-over");
+        } catch (NumberFormatException ex) {
+            projectedLoadLabel.setText("Enter a valid number of hours");
+            projectedLoadLabel.getStyleClass().setAll("projected-load-label", "load-over");
+        }
+
+
     }
 
     @FXML
     public void handleSkillFilter(){
         String selectedSkill = skillFilterComboBox.getValue();
-        employeeComboBox.setItems(empRepo.filterBySkill(selectedSkill));
+        employeeComboBox.setItems(resourceService.getEmployeesBySkill(selectedSkill));
         employeeComboBox.getSelectionModel().clearSelection();
     }
 
     @FXML
-    public void handleLiveBalancing(){
-        
+    public void handleLiveBalancing() {
+        Employee selectedEmployee = employeeComboBox.getValue();
+
+        if (selectedEmployee == null) {
+            currentWorkloadTable.setItems(FXCollections.observableArrayList());
+            projectedLoadLabel.setText("0 / 40 hrs");
+            projectedLoadLabel.getStyleClass().setAll("projected-load-label");
+            confirmBtn.setDisable(true);
+            return;
+        }
+
+        ObservableList<Assignment> currentAssignments = resourceService.getAssignmentsByEmployee(selectedEmployee);
+        currentWorkloadTable.setItems(currentAssignments);
+
+        double newHours;
+        try {
+            newHours = Double.parseDouble(newHoursField.getText());
+        } catch (NumberFormatException ex) {
+            newHours = 0;
+        }
+
+        double currentHours = currentAssignments.stream()
+                .mapToDouble(Assignment::getAllocatedHours)
+                .sum();
+        double total = currentHours + newHours;
+
+        projectedLoadLabel.setText(String.format("%.1f / 40 hrs", total));
+
+        if (total > 40) {
+            projectedLoadLabel.getStyleClass().setAll("projected-load-label", "load-over");
+            confirmBtn.setDisable(true);
+        } else {
+            projectedLoadLabel.getStyleClass().setAll("projected-load-label", "load-ok");
+            confirmBtn.setDisable(false);
+        }
     }
 
     @FXML
     public void handleCancel() {
-        // TODO (backend step): discard any in-progress edits to currentWorkloadTable and close the dialog.
+        Stage stage = (Stage) confirmBtn.getScene().getWindow();
+        stage.close();
     }
 }

@@ -11,15 +11,29 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.stream.Collectors;
+import javafx.collections.transformation.FilteredList;
 
 public class ResourceService {
     private final ProjectRepository projectRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Inject
-    public ResourceService(ProjectRepository projectRepository) {
+    public ResourceService(ProjectRepository projectRepository, EmployeeRepository employeeRepository) {
         this.projectRepository = projectRepository;
+        this.employeeRepository = employeeRepository;
+    }
+
+    // need these three to not let controller interact with repository
+    public ObservableList<Project> getAllProjects() {
+        return projectRepository.findAll();
+    }
+
+    public ObservableList<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public FilteredList<Employee> getEmployeesBySkill(String skill) {
+        return employeeRepository.filterBySkill(skill);
     }
 
     public ObservableList<Assignment> getAssignmentsByEmployee(Employee e) {
@@ -36,17 +50,19 @@ public class ResourceService {
 
     public void assignTeamMember(Project p, Employee e, String role, double hours) throws OverAllocationException {
         double existingHours = 0.0;
+        // check each assignment's allocated hours for the employee
         for (Assignment assignment : getAssignmentsByEmployee(e)) {
             existingHours += assignment.getAllocatedHours();
         }
 
+        // get their load for all hours
         double totalLoad = existingHours + hours;
         if (totalLoad > 40) {
             throw new OverAllocationException(
                     e.getName() + " would be allocated " + totalLoad + " hours, exceeding the 40-hour weekly limit.");
         }
 
-        Assignment assignment = new Assignment(new SimpleStringProperty(role), new SimpleDoubleProperty(hours), e);
+        Assignment assignment = new Assignment(new SimpleStringProperty(role), new SimpleDoubleProperty(hours), e, p);
         p.getAssignments().add(assignment);
     }
 }

@@ -1,7 +1,6 @@
 package ca.senecacollege.application.workshop4and5.controllers;
 
 import ca.senecacollege.application.workshop4and5.MainApp;
-import ca.senecacollege.application.workshop4and5.data.ProjectRepository;
 import ca.senecacollege.application.workshop4and5.models.Assignment;
 import ca.senecacollege.application.workshop4and5.models.Project;
 import ca.senecacollege.application.workshop4and5.services.ResourceService;
@@ -72,7 +71,6 @@ public class DashboardController {
     @FXML
     private Button addTeamMemberBtn;
 
-    private final ProjectRepository projRepo;
     private final ResourceService resourceService;
     private final Injector injector;
 
@@ -82,8 +80,7 @@ public class DashboardController {
     private DoubleBinding totalCostBinding;
 
     @Inject
-    public DashboardController(ProjectRepository projRepo, ResourceService resourceService, Injector injector) {
-        this.projRepo = projRepo;
+    public DashboardController(ResourceService resourceService, Injector injector) {
         this.resourceService = resourceService;
         this.injector = injector;
     }
@@ -107,7 +104,7 @@ public class DashboardController {
         statusFilterChoiceBox.getItems().addAll("All", "Active", "Closed");
         statusFilterChoiceBox.setValue("All");
 
-        filteredProjects = new FilteredList<>(projRepo.findAll(), p -> true);
+        filteredProjects = new FilteredList<>(resourceService.getAllProjects(), p -> true);
         projectListView.setItems(filteredProjects);
 
         // Without this, ListView falls back to Object.toString() for each row,
@@ -177,15 +174,13 @@ public class DashboardController {
             return; // Nothing selected - no project to staff.
         }
 
-        // TODO: AllocatorController currently has no way to receive which
-        // Project it's staffing for. Once it exposes something like
-        // setProject(Project), pass `selected` into it here (e.g. via
-        // loader.<AllocatorController>getController().setProject(selected))
-        // before showAndWait().
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("resource-allocator.fxml"));
             loader.setControllerFactory(injector::getInstance);
             Scene scene = new Scene(loader.load());
+
+            AllocatorController allocatorController = loader.getController();
+            allocatorController.setProject(selected);
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Resource Allocator - " + selected.getTitle());

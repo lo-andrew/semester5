@@ -20,13 +20,13 @@
          <children>
             <Label styleClass="section-title" text="New Assignment" />
             <Label styleClass="field-label" text="Skill Filter" />
-            <ComboBox fx:id="skillFilterComboBox" prefWidth="220.0" promptText="All Skills" onAction="#handleSkillFilter"/>
+            <ComboBox fx:id="skillFilterComboBox" onAction="#handleSkillFilter" prefWidth="220.0" promptText="All Skills" />
             <Label styleClass="field-label" text="Employee" />
             <ComboBox fx:id="employeeComboBox" prefWidth="220.0" promptText="Select Employee" />
             <Label styleClass="field-label" text="Role" />
-            <TextField fx:id="roleField" prefWidth="220.0" />
+            <TextField fx:id="roleField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="220.0" />
             <Label styleClass="field-label" text="New Hours" />
-            <TextField fx:id="newHoursField" prefWidth="220.0" />
+            <TextField fx:id="newHoursField" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="220.0" />
             <Label styleClass="field-label" text="Projected Load" />
             <Label fx:id="projectedLoadLabel" styleClass="projected-load-label" text="0 / 40 hrs" />
             <HBox spacing="10.0">

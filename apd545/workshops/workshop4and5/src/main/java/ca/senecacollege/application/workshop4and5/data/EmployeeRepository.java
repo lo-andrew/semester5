@@ -9,11 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
-/**
- * Lifecycle is managed by Guice (bound as a singleton in AppModule), rather
- * than a hand-rolled getInstance() - the manual instantiation the workshop
- * spec asks us to avoid.
- */
 public class EmployeeRepository {
 
     private final ObservableList<Employee> allEmployees = FXCollections.observableArrayList();

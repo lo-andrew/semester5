@@ -22,13 +22,13 @@
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="265.0">
                <children>
                   <Label styleClass="field-label" text="Search" />
-                  <TextField fx:id="searchField" prefHeight="25.0" prefWidth="175.0" promptText="Filter by title..." />
+                  <TextField fx:id="searchField" prefHeight="35.0" prefWidth="175.0" promptText="Filter by title..." />
                </children>
             </VBox>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="100.0">
                <children>
                   <Label styleClass="field-label" text="Status" />
-                  <ChoiceBox fx:id="statusFilterChoiceBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="statusFilterChoiceBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="150.0" />
                </children>
             </VBox>
          </children>
@@ -54,8 +54,8 @@
               <columns>
                 <TableColumn fx:id="employeeNameColumn" prefWidth="230.0" text="Employee Name" />
                 <TableColumn fx:id="roleColumn" prefWidth="230.0" text="Role" />
-                <TableColumn fx:id="allocatedHoursColumn" prefWidth="230.0" text="Allocated Hours" />
-                <TableColumn fx:id="costColumn" prefWidth="230.0" text="Cost" />
+                <TableColumn fx:id="allocatedHoursColumn" prefWidth="194.0" text="Allocated Hours" />
+                <TableColumn fx:id="costColumn" prefWidth="192.0" text="Cost" />
               </columns>
             </TableView>
             <Button fx:id="addTeamMemberBtn" mnemonicParsing="false" onAction="#handleAddTeamMember" styleClass="primary-button" text="Add Team Member" />
