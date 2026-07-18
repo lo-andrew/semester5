@@ -1,44 +1,41 @@
-Workshop 3
-APD545 NBB
+Workshop 4 & 5
+APD545
 Andrew Lo
 162539217
 
 Reflection
 
-What challenges did you encounter when implementing Manual DI, MVC, and Repository Pattern?
+Transactional Integrity
+In the application, the user can edit the Current Workload hours in the table. 
+If the user does click cancel after editing, the edited values are still saved 
+and the data is actually changed. In a production environment, this could allow
+users to make changes without them realizing what they have done or realized that
+the changes they made are live and save without confirming anything. Another big 
+risk is that since it allows for live editing, any changes is permanent with no
+way to detect or reverse it. There is no rollback / stack that tracks changes, so
+all changes are essentially unaudited.
 
-When implementing Manual DI, I wasn't initially sure where or how to inject, and at first I had a constructor
-to handle the injection, but I fell back on creating a separate method to set the repositories when injecting
-them. For the MVC pattern, I was initially confused on the implementation of the controllers for the different
-sections of my form used to calculate the loan and amortization. After some research, I found the best way was to 
-create an initialize method that would invoke a setFields method to give references to the FXML controls to
-the corresponding controllers. For the repository patterns, I didn't have issues really, it was straightforward
-to create a repository for the loans and users
+Scalability
+If the system grew, the best way to optimize the program to improve performance would
+be to utilize a hash map for for the look up of records. Right now, the program looks
+through every single project and looks at all the assignment, and checks for the employee.
+A hashmap that maps an employee directly to the list of their assignments would be
+much faster than having to go through every single project and assignment. The only
+thing wrong with this optimization is that it would use more memory as the assignments
+are listed twice inside another map.
 
-How did you ensurethe amortization schedule displayed accurate and formatted data?
+Design Patterns
+The association class is useful to link projects and employees since it represents
+the specific role and hours of an employee on a project. It neither belongs to the
+employee soley, nor the project. Using a List inside the Project class
+to keep track of the employees would lose context on what the role of each employee
+would be doing, as well as the allocated hours. A hashmap would give the hour attribute
+but would essentially be an Assignment. If not using the Assignment Class, A Map wouldn't 
+allow for easy binding to the UI, making it difficult to do a live binding to the UI controls.
 
-The setup for the amortization schedule was a bit difficult. I had to first ensure that the columns were correct
-and also ensure that the columns that had money displayed were formatted correctly, where I used a helper method
-to format those. 
 
-What was the most challenging part of the workshop, and how did you overcome it?
-
-For me, the most challenging part of the workshop was setting up the LoanController. Having to recognize
-which controls were for which other controller and setting up the calculation was a difficult process.
-It took some planning to figure out what exactly I needed in terms of calculation and then figuring out
-For giving the controls to the correct controllers, I had to really plan and set up what I needed each 
-controller to do, or figure out what exactly they should be doing. Following my designs, I was able to
-accomplish this by looking at what each part of the loan building does and designate what each controller
-will do.
-
-What new skills or concepts did you learn that you found valuable?
-
-Direct injecting was a fun concept to learn, that you can inject dependencies into modules.
-It allowed for the whole program to be more decoupled, and when I was debugging, it made
-the process a bit easier, being able to determine any errors I had and trace it back to
-the module causing errors.
-
-If you were to extend this application, what additional features would you add?
-If I were to extend the application, I think I would add an actual connection to a database
-to save users and loan rates. I think I would also add in hashing to keep the user information
-safe and private. 
+Additional Reflection
+For this workshop, it was stated that only the controllers must only talk to services and
+not the repositories. The UML as empRepo and projRepo for the AllocatorController and DashboardController.
+Since controllers only talk to services, I deviated from those fields and made methods inside
+the ResourceServices that interact with the repositories. 

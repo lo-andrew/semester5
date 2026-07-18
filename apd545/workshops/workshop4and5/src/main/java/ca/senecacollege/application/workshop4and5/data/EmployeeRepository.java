@@ -28,6 +28,7 @@ public class EmployeeRepository {
         return new FilteredList<>(allEmployees, employee -> employee.getSkills().contains(skill));
     }
 
+    // used to seed in employee data
     private void seedData() {
         allEmployees.add(new InternalStaff(
                 new SimpleStringProperty("1"), new SimpleStringProperty("John Smith"),

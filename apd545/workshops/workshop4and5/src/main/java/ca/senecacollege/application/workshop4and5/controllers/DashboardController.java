@@ -18,6 +18,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -97,15 +98,22 @@ public class DashboardController {
         costColumn.setCellValueFactory(cellData ->
                 cellData.getValue().getCost());
 
+        // formatting tablecell to render as currency
+        costColumn.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Number cost, boolean empty) {
+                super.updateItem(cost, empty);
+                setText(empty || cost == null ? null : String.format("$%,.2f", cost.doubleValue()));
+            }
+        });
+
         statusFilterChoiceBox.getItems().addAll("All", "Active", "Closed");
         statusFilterChoiceBox.setValue("All");
 
         filteredProjects = new FilteredList<>(resourceService.getAllProjects(), p -> true);
         projectListView.setItems(filteredProjects);
 
-        // Without this, ListView falls back to Object.toString() for each row,
-        // which is why it was showing "ca.senecacollege...FixedPriceProject@6001aa38"
-        // instead of the project title.
+        // getting proj titles for list view
         projectListView.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Project project, boolean empty) {
@@ -114,8 +122,7 @@ public class DashboardController {
             }
         });
 
-        // Live filtering: re-run handleFilter() whenever either input changes,
-        // rather than waiting on a button click / Enter key.
+        // re-run handleFilter when input changes
         searchField.textProperty().addListener((obs, oldVal, newVal) -> handleFilter());
         statusFilterChoiceBox.valueProperty().addListener((obs, oldVal, newVal) -> handleFilter());
 
@@ -138,9 +145,6 @@ public class DashboardController {
     }
 
     private void showProjectDetails(Project project) {
-        // Selecting a new project replaces the binding below; unbind the old
-        // one first so it doesn't keep listening to the previous project's
-        // assignments list after it's no longer displayed.
         totalCostLabel.textProperty().unbind();
 
         if (project == null) {
@@ -167,7 +171,7 @@ public class DashboardController {
     private void handleAddTeamMember() {
         Project selected = projectListView.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            return; // Nothing selected - no project to staff.
+            return; // no project to staff.
         }
 
         try {

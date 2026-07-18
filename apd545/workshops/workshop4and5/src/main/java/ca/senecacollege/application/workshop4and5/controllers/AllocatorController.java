@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -85,6 +86,14 @@ public class AllocatorController {
         });
         workloadCostColumn.setCellValueFactory(cellData ->
                 cellData.getValue().getCost());
+        // need to get cost as currency
+        workloadCostColumn.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Number cost, boolean empty) {
+                super.updateItem(cost, empty);
+                setText(empty || cost == null ? null : String.format("$%,.2f", cost.doubleValue()));
+            }
+        });
 
         skillFilterComboBox.getItems().add("All Skills");
         resourceService.getAllEmployees().forEach(e ->
@@ -128,8 +137,6 @@ public class AllocatorController {
             projectedLoadLabel.setText("Enter a valid number of hours");
             projectedLoadLabel.getStyleClass().setAll("projected-load-label", "load-over");
         }
-
-
     }
 
     @FXML
@@ -143,6 +150,7 @@ public class AllocatorController {
     public void handleLiveBalancing() {
         Employee selectedEmployee = employeeComboBox.getValue();
 
+        // initialize labels and button
         if (selectedEmployee == null) {
             currentWorkloadTable.setItems(FXCollections.observableArrayList());
             projectedLoadLabel.setText("0 / 40 hrs");
